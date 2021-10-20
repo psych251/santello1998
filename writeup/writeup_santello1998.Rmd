@@ -1,5 +1,5 @@
 ---
-title: "Reproducibility Report for Postural Hand Synergies for Tool Use by Santello, Flanders and Soechting (1998, Journal of Neuroscience)"
+title: "Replication of Postural Hand Synergies for Tool Use by Santello, Flanders and Soechting (1998, Journal of Neuroscience)"
 author: "Shivani Guptasarma (shivanig@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
@@ -10,73 +10,157 @@ output:
       collapsed: false
 ---
 
-<!-- Reproducibility reports should all use this template to standardize reporting across projects. These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
+<!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
 ## Introduction
 
-A study was performed by Santello *et al.* in 1998 to investigate whether grasp postures formed by human hands showed natural patterns of coordination between the joints. Participants were asked to grasp imaginary objects of diverse shapes with their right hand. The angles between various segments of the hand were measured with a tracking glove and a principal component analysis performed on the results, revealing two major ``postural synergies". This report documents a replication of the 1998 study, using  visual tracking of the hand with a wearable headset. 
+A study was performed by Santello *et al.* in 1998 to investigate whether grasping postures showed natural patterns of coordination between the many joints of the human hand. Participants were asked to grasp imaginary objects of diverse shapes with one of their hands. The angles between various segments of the hand were measured with a tracking glove, and analyzed to identify ``postural synergies". This report documents a replication of the 1998 study, using  visual tracking of the hand with a wearable headset. The key analysis of interest of the replication is a **principal component analysis** (PCA) of the joint angles data from grasping of a number of geometries. An important finding of the original paper was that the first two principal components account for more than 80% of the variance in posture.
 
-[No abstract is needed.]  Each reproducibility project will have a straightforward, no frills report of the study and reproducibility results. These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of your attempt to reproduce the results. Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for your reproducibility attempt, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
+While a goal of the original experiment was to better understand the neuromuscular basis of movement, its results have proved significant for efficient motion planning in robotic manipulators, as well as for the design and control of prosthetic hands. The choice of this study for replication was motivated by an interest in simplifying the control of prosthetic devices by exploiting an understanding of the neural control of movement. 
 
-The key analysis of interest is a **principal component analysis** of the joint angles data from grasping of a number of objects. A key finding of the original paper was that the first two principal components account for more than 80% of the variance in posture.
+It was anticipated that the use of visual tracking might lead to less accurate data for fingers which were partially or completely occluded from the camera. Since the stimuli were entirely verbal, it was likely that different subjects would interpret them differently based on their own imagined shape and size of each object. Finally, owing to a lack of experience with implementation, minor challenges were expected in obtaining joint angle data in a usable form from a proprietary headset, and performing a PCA in the chosen computing environment.
 
-### Justification for choice of study
+Project repository: [https://github.com/psych251/santello1998](https://github.com/psych251/santello1998)
 
-While a goal of the original experiment was to better understand the neuromuscular basis of movement, its results have proved significant for the planning of feasible grasps in robotic manipulators, as well as for the design and control of prosthetic hands. This replication was motivated by an interest in both, understanding the neural control of movement, and simplifying the control of prosthetic devices. 
+Original paper: [https://github.com/psych251/santello1998/blob/main/original_paper/Santello1998_postural_synergies.pdf](https://github.com/psych251/santello1998/blob/main/original_paper/Santello1998_postural_synergies.pdf)
 
-### Anticipated challenges
-
-It was anticipated that the use of visual tracking might lead to challenges with recording grasps in which some fingers were partially or completely occluded from the camera. Since the stimuli were entirely verbal, it was also expected that different subjects would interpret them differently based on their own imagined shape and size of each object. Owing to a lack of experience with implementation, some challenges were expected in obtaining joint angle data in a usable form from a proprietary headset, and setting up a pipeline with two clickers to mark the start and end of the reach-and-grasp motion.
-
-### Links
-
-Project repository (on Github): 
-
-Original paper (as hosted in your repo): 
 
 ## Methods
 
-### Description of the steps required to reproduce the results
+### Power Analysis
 
-Please describe all the steps necessary to reproduce the key result(s) of this study. 
+Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
 
-### Differences from original study
+### Planned Sample
 
-Explicitly describe known differences in the analysis pipeline between the original paper and yours (e.g., computing environment). The goal, of course, is to minimize those differences, but differences may occur. Also, note whether such differences are anticipated to influence your ability to reproduce the original results.
+The sample of the original study as well as the replication was 5 right-handed participants, three male and two female. The age range of the original subjects was 30-41 years, while the replication used subjects of ages 22-30 years. 
+<!--Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.-->
 
-## Project Progress Check 1
+### Materials
 
-### Measure of success
+The original paper used a Cyberglove hand-tracking device while the replication used a Microsoft Hololens 2. A contact switch was for detecting movement onset and a second switch was to be pressed by the left hand, following the paper precisely.
 
-Please describe the outcome measure for the success or failure of your reproduction and how this outcome will be computed.
+<!--All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
+### Procedure	
 
-### Pipeline progress
+"Subjects were instructed to shape the right hand to grasp and use a large number of imagined objects (n = 57; Table 1). They were encouraged to move the proximal arm in tandem with the hand motion. An object was named at the beginning of each trial. We selected objects spanning a large range of sizes and shapes to assess the consequent modulation of hand posture...The subject was asked to imagine the object floating in space at a distance of ∼40 cm anterior to the subject’s frontal plane. The elbow and wrist rested on a flat surface, the forearm was horizontal, the arm was oriented in the parasagittal plane passing through the shoulder, and the hand was in a semipronated position. At presentation of a “go” signal, the subject moved the arm and hand as if to grasp and use the named object. A contact switch was released at movement onset. When subjects had attained a static hand posture, they pressed a second switch with their left hand. Each subject performed a total of five trials for each of the objects; all trials were presented in random order."
 
-Earlier in this report, you described the steps necessary to reproduce the key result(s) of this study. Please describe your progress on each of these steps (e.g., data preprocessing, model fitting, model evaluation).
+The above procedure was followed precisely and the list of objects presented in Table 1 of the paper was used without modification.
+
+<!--Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
+
+### Analysis Plan
+
+The key analysis of interest is the principal component analysis of the static joint angles after the goal pose is achieved. Hence, only one frame of joint angles data was used in the analysis for each trial. 
+
+The joint angles estimated from visual tracking were (following the original work):
+1. metacarpal-phalangeal (mcp) and proximal interphalangeal (pip) flexion of each of the 4 fingers
+2. abduction between the 3 pairs of adjacent fingers
+3. mcp flexion, abduction, ip flexion, and rotation of the thumb
+
+The following analysis procedure was followed precisely:
+
+"For each subject, the five trials per object were first averaged to obtain a total of 57 hand postures. For each sensor, we then subtracted the grand mean computed over the 57 objects (so that the range was centered about 0°). The hand posture for each object was thus characterized as a “waveform” of the values of the 15 sensors (Santello and Soechting, 1997). The principal components (PCs) were then computed from the eigenvalues and eigenvectors of the matrix of the covariance coefficients between each of the 57 waveforms."
+
+<!--Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+
+**Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.-->
+
+### Differences from Original Study
+
+The replication differed from the original study in that:
+1. data was collected using a headset rather than a tracking glove
+2. participant ages belonged to a lower range than the original
+
+The conclusions are expected to be robust to these changes. 
+
+<!--Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.-->
+
+### Methods Addendum (Post Data Collection)
+
+You can comment this section out prior to final report with data collection.
+
+#### Actual Sample
+  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+
+#### Differences from pre-data collection methods plan
+  Any differences from what was described as the original plan, or “none”.
 
 
 ## Results
+
 
 ### Data preparation
 
 Data preparation following the analysis plan.
 	
-```{r include=F}
-### Data Preparation
+```{r include=T}
+###Data Preparation
 
-#### Load Relevant Libraries and Functions
+####Load Relevant Libraries and Functions
+library(foreign) # for reading spss formatted data
+library(tidyr)
+library(dplyr)
+library(stringr) # useful for some string manipulation
+library(ggplot2)
+library(corrr)
 
-#### Import data
+####Import data
+d1 = read.csv("", to.data.frame=T)
+d2 = read.csv("", to.data.frame=T)
+d3 = read.csv("", to.data.frame=T)
+d4 = read.csv("", to.data.frame=T)
+d5 = read.csv("", to.data.frame=T)
+
+#hololens will be set up to give csv for each participant in the format 
+#trial -- object -- index_mcp -- index_pip -- etc
+
+handpose_wide_raw = bind_rows(list(d1, d2, d3, d4, d5), .id="Participant id")
 
 #### Data exclusion / filtering
 
+#should I even record contact switches timings?
+
 #### Prepare data for analysis - create columns etc.
+handpose_long_d = handpose_wide_raw %>%
+  pivot_longer(cols=-c("Participant id", "Object", "Trial"),
+               names_to='Joint', 
+               values_to='Angle_degrees')
+handpose_long %>% 
+  group_by(Participant_id, Object) %>%
+  summarise(Mean_angle_degrees = mean(Angle_degrees)) %>% #this will find mean over trials for given participant and object
+  mutate(Recentered_angle_degrees = Angle_degrees-Mean_angle_degrees) %>%
+  ungroup()
+
+handpose_wide_processed = handpose_long %>%
+  pivot_wider(handpose_long, id_cols = -c(Mean_angle_degrees, Angle_degrees), names_from = Joint, values_from = Recentered_angle_degrees)
+
 ```
 
-### Key analysis
+### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+```{r, include=T}
+handpose_wide_processed %>% 
+  group_by(Participant_id) %>%
+  group_modify(~ corrr::correlate(.x)) %>% # correlations across joints for given participant
+  nest(cols = -c(Participant_id, Object)) %>%
+  mutate(pca = map(data, ~ prcomp(.x, 
+                                  center = TRUE, scale = TRUE)),
+         pca_aug = map2(pca, data, ~augment(.x, data = .y))) # need to play around with this to understand it
+
+#var_exp <- handpose_wide_processed %>% 
+#  unnest(pca_aug) %>% 
+#  summarize_at(.vars = vars(contains("PC")), .funs = funs(var)) %>% 
+#  gather(key = pc, value = variance) %>% 
+#  mutate(var_exp = variance/sum(variance),
+#         cum_var_exp = cumsum(var_exp),
+#         pc = str_replace(pc, ".fitted", ""))
+
+#useful link https://tbradley1013.github.io/2018/02/01/pca-in-a-tidy-verse-framework/ (comment out later)
+```
+
+<!--The analyses as specified in the analysis plan.-->
 
 *Side-by-side graph with original graph is ideal here*
 
@@ -86,10 +170,10 @@ Any follow-up analyses desired (not required).
 
 ## Discussion
 
-### Summary of Reproduction Attempt
+### Summary of Replication Attempt
 
-Open the discussion section with a paragraph summarizing the primary result from the key analysis and assess whether you successfully reproduced it, partially reproduced it, or failed to reproduce it.  
+Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis of the dataset, (b) assessment of the meaning of the successful or unsuccessful reproducibility attempt - e.g., for a failure to reproduce the original findings, are the differences between original and present analyses ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the reproducibility attempt (if you contacted them).  None of these need to be long.
+Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
