@@ -95,7 +95,7 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 	
-```{r include=T}
+```{r include=T, eval=F}
 ###Data Preparation
 
 ####Load Relevant Libraries and Functions
@@ -140,7 +140,9 @@ handpose_wide_processed = handpose_long %>%
 
 ### Confirmatory analysis
 
-```{r, include=T}
+The single statistical test that justifies the main inference of the paper is whether the amount of variation accounted for by the first two principal components together exceeds 80%.
+
+```{r, include=T, eval=F}
 handpose_wide_processed %>% 
   group_by(Participant_id) %>%
   group_modify(~ corrr::correlate(.x)) %>% # correlations across joints for given participant
