@@ -1,0 +1,937 @@
+Logging to C:/Data/Users/stanf/AppData/Local/Packages/Template3D_pzq3xp76mxafg/TempState/UnityPlayer.log
+Loading native plugins
+  Loading AudioPluginMicrosoftSpatializer.dll
+  Loading GpuStats.dll
+  Loading openxr_loader.dll
+  Loading PlaneFinding.dll
+  Loading Microsoft.MixedReality.Input.dll
+  Loading MicStreamSelector.dll
+  Loading AudioPluginMsHRTF.dll
+Module information:
+ Built with Compiler Ver '192528614'
+ Built from '2020.3/staging' branch
+ Version is '2020.3.14f1 (d0d1bb862f9d)'
+ Release build
+ Application type 'D3D'
+ OS 'Windows 10 (10.0.19041)'
+PlayerConnection initialized from C:/Data/Users/DefaultAccount/AppData/Local/DevelopmentFiles/Template3DVS.Release_ARM64.Shivani_Guptasarma/Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55488
+Multi-casting "[IP] 10.30.164.93 [Port] 55488 [Flags] 2 [Guid] 3415020845 [EditorId] 0 [Version] 1048832 [Id] UWPPlayerARM(HOLOLENS-7VHN90) [Debug] 0 [PackageName] Template3D_pzq3xp76mxafg [ProjectName] <no name>" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55488]
+PlayerConnection already initialized - listening to [0.0.0.0:55488]
+[Subsystems] Discovering subsystems at path C:/Data/Users/DefaultAccount/AppData/Local/DevelopmentFiles/Template3DVS.Release_ARM64.Shivani_Guptasarma/Data/UnitySubsystems
+[Subsystems] No descriptors matched for  examples in UnitySubsystems/MicrosoftOpenXRPlugin/UnitySubsystemsManifest.json.
+[Subsystems] 1 'inputs' descriptors matched in UnitySubsystems/MicrosoftOpenXRPlugin/UnitySubsystemsManifest.json
+[Subsystems] No descriptors matched for  displays in UnitySubsystems/MicrosoftOpenXRPlugin/UnitySubsystemsManifest.json.
+[Subsystems] 1 'meshings' descriptors matched in UnitySubsystems/MicrosoftOpenXRPlugin/UnitySubsystemsManifest.json
+[Subsystems] No descriptors matched for  examples in UnitySubsystems/UnityOpenXR/UnitySubsystemsManifest.json.
+[Subsystems] 1 'inputs' descriptors matched in UnitySubsystems/UnityOpenXR/UnitySubsystemsManifest.json
+[Subsystems] 1 'displays' descriptors matched in UnitySubsystems/UnityOpenXR/UnitySubsystemsManifest.json
+[Subsystems] No descriptors matched for  meshings in UnitySubsystems/UnityOpenXR/UnitySubsystemsManifest.json.
+[Subsystems] No descriptors matched for  examples in UnitySubsystems/WindowsMRXRSDK/UnitySubsystemsManifest.json.
+[Subsystems] 1 'inputs' descriptors matched in UnitySubsystems/WindowsMRXRSDK/UnitySubsystemsManifest.json
+[Subsystems] 1 'displays' descriptors matched in UnitySubsystems/WindowsMRXRSDK/UnitySubsystemsManifest.json
+[Subsystems] 1 'meshings' descriptors matched in UnitySubsystems/WindowsMRXRSDK/UnitySubsystemsManifest.json
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Qualcomm(R) Adreno(TM) 630 GPU (ID=0x45373230)
+    Vendor:   
+    VRAM:     1932 MB
+Initialize engine version: 2020.3.14f1 (d0d1bb862f9d)
+XRGeneral Settings awakening...
+
+D3D11 device created for Microsoft Media Foundation video decoding.
+[Subsystems] Loading plugin UnityOpenXR for subsystem OpenXR Display...
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Display
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Input
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Display
+[XR] [1528] [21:53:40.331][Info   ] Available Layers: (0)
+[Subsystems] Loading plugin UnityOpenXR for subsystem OpenXR Input...
+[Subsystems] Loading plugin MicrosoftOpenXRPlugin for subsystem OpenXR Input Extension...
+[Subsystems] OpenXR Extension successfully registered Provider for OpenXR Mesh Extension
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Input
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Display
+[XR] [MROpenXR][Info   ][21:53:40.350187][tid:5f8] MeshProvider_RegisterLifecycleProvider
+[Subsystems] OpenXR Extension successfully registered Provider for OpenXR Input Extension
+[Subsystems] OpenXR Extension successfully registered Provider for OpenXR Mesh Extension
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Input
+[Subsystems] OpenXR XR Plugin successfully registered Provider for OpenXR Display
+[XR] [MROpenXR][Info   ][21:53:40.350520][tid:5f8] InputProvider_RegisterLifeCycleProvider
+[XR] [MROpenXR][Info   ][21:53:40.350611][tid:5f8] InputProvider_LifecycleInitialize
+[Subsystems] Loading plugin MicrosoftOpenXRPlugin for subsystem OpenXR Mesh Extension...
+[XR] [MROpenXR][Info   ][21:53:40.352486][tid:5f8] MeshProvider_LifecycleInitialize
+New input system (experimental) initialized
+[XR] [MROpenXR][Info   ][21:53:40.433182][tid:5f8] MicrosoftOpenXRPlugin_ReplacedxrCreateSession
+[XR] [MROpenXR][Info   ][21:53:40.433329][tid:5f8] MicrosoftOpenXRPlugin_InsertHolographicWindowAttachment
+[XR] [1528] [21:53:40.701][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_UNKNOWN->XR_SESSION_STATE_IDLE session=2 time=28673439020364
+[XR] [1528] [21:53:40.701][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_IDLE->XR_SESSION_STATE_READY session=2 time=28673439051875
+[XR] [MROpenXR][Info   ][21:53:40.701949][tid:5f8] ViewConfigurationSettings_PrimaryStereoEnabled
+[XR] [MROpenXR][Info   ][21:53:40.702005][tid:5f8] ViewConfigurationSettings_SecondaryMonoFirstPersonObserverEnabled
+[XR] [MROpenXR][Info   ][21:53:40.702159][tid:5f8] LocatableCameraProvider_Registered
+[XR] [MROpenXR][Info   ][21:53:40.704649][tid:5f8] InputProvider_LifecycleStart
+The referenced script (Microsoft.MixedReality.Toolkit.XRSDK.Oculus.Input.OculusXRSDKDeviceManagerProfile) on this Behaviour is missing!
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+
+A scripted object (probably Microsoft.MixedReality.Toolkit.XRSDK.Oculus.Input.OculusXRSDKDeviceManagerProfile?) has a different serialization layout when loading. (Read 72 bytes but expected 116 bytes)
+Did you #ifdef UNITY_EDITOR a section of your serialized properties in any of your scripts?
+
+XRTextureManager::RequestCreateTexture
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 1 col: 0000023AF7CD8A38 d: 0000000000000000)
+RenderTexture::Create (id: 1)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CD8A38
+[XR] [1528] [21:53:41.699][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_READY->XR_SESSION_STATE_SYNCHRONIZED session=2 time=28674486613854
+[XR] [1528] [21:53:41.699][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_SYNCHRONIZED->XR_SESSION_STATE_VISIBLE session=2 time=28674486621562
+XRTextureManager::RequestCreateTexture
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 2 col: 0000023AF7CDA6B8 d: 0000000000000000)
+RenderTexture::Create (id: 2)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CDA6B8
+XRTextureManager::RequestCreateTexture
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 3 col: 0000023AF7CD8CB8 d: 0000000000000000)
+RenderTexture::Create (id: 3)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CD8CB8
+[XR] [1528] [21:53:42.217][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_VISIBLE->XR_SESSION_STATE_FOCUSED session=2 time=28675026363854
+[XR] [1528] [21:53:42.218][Info   ] 
+
+==== Start Unity OpenXR Diagnostic Report ====
+
+
+[XR] [1528] [21:53:42.218][Info   ] ==== Report Reason: System Startup Completed ====
+
+
+[XR] [1528] [21:53:42.218][Info   ] ==== OpenXR Support Details ====
+[XR] [1528] [21:53:42.218][Info   ] OpenXR Runtime:
+[XR] [1528] [21:53:42.218][Info   ]     Microsoft, which is a Unity supported partner
+[XR] [1528] [21:53:42.219][Info   ] Unity OpenXR Features:
+[XR] [1528] [21:53:42.219][Info   ]     HandTrackingFeaturePlugin WSA, MixedRealityFeaturePlugin WSA, MotionControllerFeaturePlugin WSA: Microsoft, which is a Unity supported partner
+[XR] [1528] [21:53:42.219][Info   ]     EyeGazeInteraction WSA, MicrosoftHandInteraction WSA: Unity
+[XR] [1528] [21:53:42.219][Info   ] Unity Support:
+[XR] [1528] [21:53:42.220][Info   ]     Unity supports the runtime and Unity OpenXR Features above. When requesting assistance, please copy the OpenXR section from ==== Start Unity OpenXR Diagnostic Report ==== to ==== End Unity OpenXR Diagnostic Report ==== to the bug or forum post.
+[XR] [1528] [21:53:42.220][Info   ] 
+[XR] [1528] [21:53:42.220][Info   ] ==== OpenXR Init Info ====
+[XR] [1528] [21:53:42.220][Info   ] 
+[XR] [1528] [21:53:42.220][Info   ] Stage 1 Missing Entry Points: (1)
+[XR] [1528] [21:53:42.220][Info   ]   xrInitializeLoaderKHR
+[XR] [1528] [21:53:42.220][Info   ] 
+[XR] [1528] [21:53:42.220][Info   ] Stage 2 Missing Entry Points: (2)
+[XR] [1528] [21:53:42.220][Info   ]   xrGetVisibilityMaskKHR
+[XR] [1528] [21:53:42.220][Info   ]   xrGetD3D12GraphicsRequirementsKHR
+[XR] [1528] [21:53:42.220][Info   ] 
+[XR] [1528] [21:53:42.220][Info   ] ==== OpenXR Provider Info ====
+[XR] [1528] [21:53:42.220][Info   ] Spec Version: 1.0.17
+[XR] [1528] [21:53:42.220][Info   ] Provider Version: 1.2.8
+[XR] [1528] [21:53:42.220][Info   ] App: hand_tracking 0.1 #3159629941
+[XR] [1528] [21:53:42.220][Info   ] Engine: 2020.3.14f1 #2047059524
+[XR] [1528] [21:53:42.221][Info   ] 
+[XR] [1528] [21:53:42.221][Info   ] ==== OpenXR Runtime Info ====
+[XR] [1528] [21:53:42.221][Info   ] 
+[XR] [1528] [21:53:42.221][Info   ] Features requested to be enabled: 5
+[XR] [1528] [21:53:42.221][Info   ]     Name=Eye Gaze Interaction Profile Extension=XR_EXT_eye_gaze_interaction Version=0.0.1
+[XR] [1528] [21:53:42.221][Info   ]     Name=Hand Tracking Extension=XR_EXT_hand_tracking XR_MSFT_hand_tracking_mesh Version=1.1.1
+[XR] [1528] [21:53:42.221][Info   ]     Name=Microsoft Hand Interaction Profile Extension=XR_MSFT_hand_interaction Version=0.0.1
+[XR] [1528] [21:53:42.221][Info   ]     Name=Mixed Reality Features Extension=XR_MSFT_holographic_window_attachment XR_MSFT_unbounded_reference_space XR_MSFT_spatial_anchor XR_MSFT_secondary_view_configuration XR_MSFT_first_person_observer XR_MSFT_spatial_graph_bridge XR_MSFT_perception_anchor_interop XR_MSFT_spatial_anchor_persistence XR_MSFT_scene_understanding XR_MSFT_scene_understanding_serialization XR_MSFT_spatial_anchor_export_preview XR_MSFT_composition_layer_reprojection Version=1.1.1
+[XR] [1528] [21:53:42.221][Info   ]     Name=Motion Controller Model Extension=XR_MSFT_controller_model Version=1.1.1
+[XR] [1528] [21:53:42.221][Info   ] 
+[XR] [1528] [21:53:42.221][Info   ] Features with extensions that failed to be enabled: 3
+[XR] [1528] [21:53:42.221][Info   ]     Name=Mixed Reality Features Extension=XR_MSFT_spatial_anchor_persistence  Version=1.1.1
+[XR] [1528] [21:53:42.221][Info   ]     Name=Mixed Reality Features Extension=XR_MSFT_spatial_anchor_export_preview  Version=1.1.1
+[XR] [1528] [21:53:42.221][Info   ]     Name=Motion Controller Model Extension=XR_MSFT_controller_model  Version=1.1.1
+[XR] [1528] [21:53:42.221][Info   ] 
+[XR] [1528] [21:53:42.221][Info   ] Available Extensions: (22)
+[XR] [1528] [21:53:42.221][Info   ]   Name=XR_KHR_win32_convert_performance_counter_time SpecVersion=1
+[XR] [1528] [21:53:42.221][Info   ]   Name=XR_KHR_D3D11_enable SpecVersion=5
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_KHR_D3D12_enable SpecVersion=7
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_KHR_composition_layer_depth SpecVersion=5
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_KHR_composition_layer_color_scale_bias SpecVersion=5
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_unbounded_reference_space SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_spatial_anchor SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_perception_anchor_interop SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_EXT_win32_appcontainer_compatible SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_EXT_conformance_automation SpecVersion=3
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_composition_layer_reprojection SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_spatial_graph_bridge SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_EXT_eye_gaze_interaction SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_hand_interaction SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_EXT_hand_tracking SpecVersion=4
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_hand_tracking_mesh SpecVersion=3
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_holographic_window_attachment SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_secondary_view_configuration SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_first_person_observer SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_scene_understanding SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_MSFT_scene_understanding_serialization SpecVersion=1
+[XR] [1528] [21:53:42.222][Info   ]   Name=XR_EXT_debug_utils SpecVersion=4
+[XR] [1528] [21:53:42.222][Info   ] 
+[XR] [1528] [21:53:42.223][Info   ] Available Layers: (0)
+[XR] [1528] [21:53:42.223][Info   ] 
+[XR] [1528] [21:53:42.223][Info   ] Runtime Name: Windows Mixed Reality Runtime
+[XR] [1528] [21:53:42.223][Info   ] Runtime Version: 107.2109.10010
+[XR] [1528] [21:53:42.223][Info   ] 
+[XR] [1528] [21:53:42.223][Info   ] Form factor: XR_FORM_FACTOR_HEAD_MOUNTED_DISPLAY
+[XR] [1528] [21:53:42.223][Info   ] 
+[XR] [1528] [21:53:42.223][Info   ] Spec extensions enabled: (17)
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_EXT_eye_gaze_interaction Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_EXT_hand_tracking Version=4
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_KHR_D3D11_enable Version=5
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_KHR_composition_layer_depth Version=5
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_KHR_win32_convert_performance_counter_time Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_composition_layer_reprojection Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_first_person_observer Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_hand_interaction Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_hand_tracking_mesh Version=3
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_holographic_window_attachment Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_perception_anchor_interop Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_scene_understanding Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_scene_understanding_serialization Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_secondary_view_configuration Version=1
+[XR] [1528] [21:53:42.223][Info   ]   Name=XR_MSFT_spatial_anchor Version=1
+[XR] [1528] [21:53:42.224][Info   ]   Name=XR_MSFT_spatial_graph_bridge Version=1
+[XR] [1528] [21:53:42.224][Info   ]   Name=XR_MSFT_unbounded_reference_space Version=1
+[XR] [1528] [21:53:42.224][Info   ] 
+[XR] [1528] [21:53:42.224][Info   ] Available Reference Spaces: (3)
+[XR] [1528] [21:53:42.224][Info   ]   Name: XR_REFERENCE_SPACE_TYPE_VIEW
+[XR] [1528] [21:53:42.224][Info   ]   Name: XR_REFERENCE_SPACE_TYPE_LOCAL
+[XR] [1528] [21:53:42.224][Info   ]   Name: XR_REFERENCE_SPACE_TYPE_UNBOUNDED_MSFT
+[XR] [1528] [21:53:42.224][Info   ] 
+[XR] [1528] [21:53:42.224][Info   ] Instance Id  : 0x1
+[XR] [1528] [21:53:42.224][Info   ] System Id    : 0x1
+[XR] [1528] [21:53:42.224][Info   ] Session Id   : 0x2
+[XR] [1528] [21:53:42.224][Info   ] 
+[XR] [1528] [21:53:42.224][Info   ] Available View Configuration Types: (2)
+[XR] [1528] [21:53:42.224][Info   ]   View Configuration Type: XR_VIEW_CONFIGURATION_TYPE_PRIMARY_STEREO (Selected)  View configuration FovMutable=True
+[XR] [1528] [21:53:42.224][Info   ]   View [0]: Recommended Width=1440 Height=936 SampleCount=1
+[XR] [1528] [21:53:42.224][Info   ]   View [0]:     Maximum Width=2880 Height=1872 SampleCount=4
+[XR] [1528] [21:53:42.224][Info   ]   View [1]: Recommended Width=1440 Height=936 SampleCount=1
+[XR] [1528] [21:53:42.224][Info   ]   View [1]:     Maximum Width=2880 Height=1872 SampleCount=4
+[XR] [1528] [21:53:42.224][Info   ]   View Configuration Type: XR_VIEW_CONFIGURATION_TYPE_SECONDARY_MONO_FIRST_PERSON_OBSERVER_MSFT   View configuration FovMutable=True
+[XR] [1528] [21:53:42.225][Info   ]   View [0]: Recommended Width=2272 Height=1276 SampleCount=1
+[XR] [1528] [21:53:42.226][Info   ]   View [0]:     Maximum Width=4544 Height=2556 SampleCount=4
+[XR] [1528] [21:53:42.226][Info   ] 
+[XR] [1528] [21:53:42.226][Info   ] Available Environment Blend Mode: (1)
+[XR] [1528] [21:53:42.226][Info   ]   Environment Blend Mode (XR_ENVIRONMENT_BLEND_MODE_ADDITIVE) : (Selected)
+[XR] [1528] [21:53:42.226][Info   ] 
+[XR] [1528] [21:53:42.226][Info   ] System Properties: Name=Windows Mixed Reality VendorId=1118
+[XR] [1528] [21:53:42.226][Info   ] System Graphics Properties: MaxWidth=16384 MaxHeight=16384 MaxLayers=16
+[XR] [1528] [21:53:42.226][Info   ] System Tracking Properties: OrientationTracking=True PositionTracking=True
+[XR] [1528] [21:53:42.227][Info   ] 
+[XR] [1528] [21:53:42.227][Info   ] ==== OpenXR Input ====
+[XR] [1528] [21:53:42.227][Info   ] 
+[XR] [1528] [21:53:42.227][Info   ] Action Set Data: 
+[XR] [1528] [21:53:42.227][Info   ] Name:     eyegaze                                  Desired Profile: /interaction_profiles/ext/eye_gaze_interaction
+[XR] [1528] [21:53:42.227][Info   ] Name:     microsofthandinteraction                 Desired Profile: /interaction_profiles/microsoft/hand_interaction
+[XR] [1528] [21:53:42.227][Info   ] 
+[XR] [1528] [21:53:42.227][Info   ] ==== OpenXR Swapchain Details ====
+[XR] [1528] [21:53:42.227][Info   ] 
+[XR] [1528] [21:53:42.228][Info   ] Render Mode: Single Pass Instanced
+[XR] [1528] [21:53:42.228][Info   ] Depth Submission Mode: Depth16Bit
+[XR] [1528] [21:53:42.228][Info   ] 
+[XR] [1528] [21:53:42.228][Info   ] Swapchain Formats:  [c:91] 87 28 29 [d:55] 45 40 20
+[XR] [1528] [21:53:42.228][Info   ] Creating swapchain for view 0 with dimensions Width=1440 Height=936 SampleCount=1
+[XR] [1528] [21:53:42.228][Info   ] 
+[XR] [1528] [21:53:42.228][Info   ] ==== Last 20 non-XR_SUCCESS returns ====
+[XR] [1528] [21:53:42.228][Info   ] [SUCCESS] xrGetReferenceSpaceBoundsRect: XR_SPACE_BOUNDS_UNAVAILABLE (2x)
+[XR] [1528] [21:53:42.228][Info   ] [SUCCESS] xrPollEvent: XR_EVENT_UNAVAILABLE (14x)
+[XR] [1528] [21:53:42.228][Info   ] 
+[XR] [1528] [21:53:42.228][Info   ] ==== Last 20 Events ====
+[XR] [1528] [21:53:42.228][Info   ] OpenXRSession::HandleSessionStateChangedEvent: XR_SESSION_STATE_UNKNOWN->XR_SESSION_STATE_IDLE
+[XR] [1528] [21:53:42.228][Info   ] OpenXRSession::HandleSessionStateChangedEvent: XR_SESSION_STATE_IDLE->XR_SESSION_STATE_READY
+[XR] [1528] [21:53:42.228][Info   ] OpenXRSession::HandleSessionStateChangedEvent: XR_SESSION_STATE_READY->XR_SESSION_STATE_SYNCHRONIZED
+[XR] [1528] [21:53:42.228][Info   ] OpenXRSession::HandleSessionStateChangedEvent: XR_SESSION_STATE_SYNCHRONIZED->XR_SESSION_STATE_VISIBLE
+[XR] [1528] [21:53:42.228][Info   ] OpenXRSession::HandleSessionStateChangedEvent: XR_SESSION_STATE_VISIBLE->XR_SESSION_STATE_FOCUSED
+[XR] [1528] [21:53:42.228][Info   ] 
+
+==== End Unity OpenXR Diagnostic Report ====
+
+
+[XR] [OpenXR Input]: Application space recovered
+[XR] [MROpenXR][Info   ][21:53:42.726298][tid:5f8] InputProvider_HandleEvent_Failed eventType=1363496514 deviceId=0 bufferSize=1
+[XR] [MROpenXR][Info   ][21:53:42.762323][tid:5f8] InputProvider_HandleEvent_Failed eventType=1363496514 deviceId=1 bufferSize=1
+UnloadTime: 1.624479 ms
+Unable to register IMixedRealityInputDeviceManager data provider (Windows Mixed Reality Device Manager) because the value of concreteType is null.
+This may be caused by code being stripped during linking. The link.xml file in the MixedRealityToolkit.Generated folder is used to control code preservation.
+More information can be found at https://docs.unity3d.com/Manual/ManagedCodeStripping.html.
+
+Unable to register IMixedRealityInputDeviceManager data provider (Windows Mixed Reality Eye Gaze Provider) because the value of concreteType is null.
+This may be caused by code being stripped during linking. The link.xml file in the MixedRealityToolkit.Generated folder is used to control code preservation.
+More information can be found at https://docs.unity3d.com/Manual/ManagedCodeStripping.html.
+
+Tracking origin unable to be set.
+
+Failed to calculate boundary bounds.
+
+Unable to register IMixedRealitySpatialAwarenessObserver data provider (Windows Mixed Reality Spatial Mesh Observer) because the value of concreteType is null.
+This may be caused by code being stripped during linking. The link.xml file in the MixedRealityToolkit.Generated folder is used to control code preservation.
+More information can be found at https://docs.unity3d.com/Manual/ManagedCodeStripping.html.
+
+[XR] [MROpenXR][Info   ][21:53:45.435060][tid:5f8] MeshProvider_LifecycleStart
+XRTextureManager::RequestCreateTexture
+XRTextureManager::RequestCreateTexture
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 4 col: 0000000000000000 d: 0000023AF7CD95B8)
+RenderTexture::Create (id: 4)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CD95B8
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 5 col: 0000023AF7CD8CB8 d: 0000000000000000)
+RenderTexture::Create (id: 5)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CD8CB8
+XRTextureManager::RequestCreateTexture
+XRTextureManager::RequestCreateTexture
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 6 col: 0000000000000000 d: 0000023AF7CDA9B8)
+RenderTexture::Create (id: 6)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CDA9B8
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 7 col: 0000023AF7CD8A38 d: 0000000000000000)
+RenderTexture::Create (id: 7)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CD8A38
+XRTextureManager::RequestCreateTexture
+XRTextureManager::RequestCreateTexture
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 8 col: 0000000000000000 d: 0000023AF7CD8138)
+RenderTexture::Create (id: 8)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CD8138
+XRTextureManager::SetupRenderTextureFromXRRequest (id: 9 col: 0000023AF7CDA6B8 d: 0000000000000000)
+RenderTexture::Create (id: 9)
+IVRDeviceCallback_CreateEyeTextureResources 0000023AF7CDA6B8
+1,IndexMCP,21.95921,32.3866844177246
+
+1,MiddleMCP,21.95921,39.4925498962402
+
+1,RingMCP,21.95921,38.1878623962402
+
+1,PinkyMCP,21.95921,41.4539680480957
+
+1,ThumbMCP,21.95921,28.9746875762939
+
+1,IndexPIP,21.95921,69.3483734130859
+
+1,MiddlePIP,21.95921,80.6266250610352
+
+1,RingPIP,21.95921,83.2525405883789
+
+1,PinkyPIP,21.95921,66.3890075683594
+
+1,ThumbIP,21.95921,7.72801685333252
+
+1,IndexMiddleABD,21.95921,10.1673431396484
+
+1,MiddleRingABD,21.95921,5.50007200241089
+
+1,RingPinkyABD,21.95921,7.81524753570557
+
+1,ThumbABD,21.95921,36.0390014648438
+
+1,ThumbROT,21.95921,15.730827331543
+
+2,IndexMCP,23.19233,9.86041164398193
+
+2,MiddleMCP,23.19233,13.2672443389893
+
+2,RingMCP,23.19233,14.0927972793579
+
+2,PinkyMCP,23.19233,4.58714532852173
+
+2,ThumbMCP,23.19233,20.7433032989502
+
+2,IndexPIP,23.19233,38.9565849304199
+
+2,MiddlePIP,23.19233,51.8353729248047
+
+2,RingPIP,23.19233,67.178337097168
+
+2,PinkyPIP,23.19233,56.0380058288574
+
+2,ThumbIP,23.19233,5.69254159927368
+
+2,IndexMiddleABD,23.19233,17.686767578125
+
+2,MiddleRingABD,23.19233,8.28439331054688
+
+2,RingPinkyABD,23.19233,12.3919153213501
+
+2,ThumbABD,23.19233,42.3152961730957
+
+2,ThumbROT,23.19233,3.94081115722656
+
+3,IndexMCP,24.51023,18.4914722442627
+
+3,MiddleMCP,24.51023,22.5747585296631
+
+3,RingMCP,24.51023,14.9329586029053
+
+3,PinkyMCP,24.51023,12.1156396865845
+
+3,ThumbMCP,24.51023,18.7832279205322
+
+3,IndexPIP,24.51023,33.4497451782227
+
+3,MiddlePIP,24.51023,35.9716339111328
+
+3,RingPIP,24.51023,40.1880226135254
+
+3,PinkyPIP,24.51023,39.7394180297852
+
+3,ThumbIP,24.51023,9.00339698791504
+
+3,IndexMiddleABD,24.51023,10.1864004135132
+
+3,MiddleRingABD,24.51023,6.88618087768555
+
+3,RingPinkyABD,24.51023,9.34264373779297
+
+3,ThumbABD,24.51023,50.9788970947266
+
+3,ThumbROT,24.51023,46.0864639282227
+
+4,IndexMCP,25.60844,40.5557899475098
+
+4,MiddleMCP,25.60844,32.7611656188965
+
+4,RingMCP,25.60844,25.8486194610596
+
+4,PinkyMCP,25.60844,38.4256057739258
+
+4,ThumbMCP,25.60844,18.9894390106201
+
+4,IndexPIP,25.60844,28.7825546264648
+
+4,MiddlePIP,25.60844,27.5407772064209
+
+4,RingPIP,25.60844,40.1206169128418
+
+4,PinkyPIP,25.60844,28.5211029052734
+
+4,ThumbIP,25.60844,12.2104930877686
+
+4,IndexMiddleABD,25.60844,11.2669239044189
+
+4,MiddleRingABD,25.60844,4.48021459579468
+
+4,RingPinkyABD,25.60844,17.9824810028076
+
+4,ThumbABD,25.60844,50.2160415649414
+
+4,ThumbROT,25.60844,49.1809501647949
+
+5,IndexMCP,27.64181,0
+
+5,MiddleMCP,27.64181,0
+
+5,RingMCP,27.64181,0
+
+5,PinkyMCP,27.64181,0
+
+5,ThumbMCP,27.64181,0
+
+5,IndexPIP,27.64181,0
+
+5,MiddlePIP,27.64181,0
+
+5,RingPIP,27.64181,0
+
+5,PinkyPIP,27.64181,0
+
+5,ThumbIP,27.64181,0
+
+5,IndexMiddleABD,27.64181,0
+
+5,MiddleRingABD,27.64181,0
+
+5,RingPinkyABD,27.64181,0
+
+5,ThumbABD,27.64181,0
+
+5,ThumbROT,27.64181,90
+
+6,IndexMCP,29.0086,16.0868091583252
+
+6,MiddleMCP,29.0086,26.2402667999268
+
+6,RingMCP,29.0086,21.546947479248
+
+6,PinkyMCP,29.0086,18.7558364868164
+
+6,ThumbMCP,29.0086,23.2902450561523
+
+6,IndexPIP,29.0086,51.1411972045898
+
+6,MiddlePIP,29.0086,69.9973907470703
+
+6,RingPIP,29.0086,77.7336959838867
+
+6,PinkyPIP,29.0086,68.0566101074219
+
+6,ThumbIP,29.0086,5.3853235244751
+
+6,IndexMiddleABD,29.0086,16.2042293548584
+
+6,MiddleRingABD,29.0086,1.75947451591492
+
+6,RingPinkyABD,29.0086,3.7289867401123
+
+6,ThumbABD,29.0086,39.797176361084
+
+6,ThumbROT,29.0086,9.20626068115234
+
+7,IndexMCP,30.05919,20.9997749328613
+
+7,MiddleMCP,30.05919,21.1078052520752
+
+7,RingMCP,30.05919,25.6642951965332
+
+7,PinkyMCP,30.05919,26.260181427002
+
+7,ThumbMCP,30.05919,28.1097297668457
+
+7,IndexPIP,30.05919,32.5335540771484
+
+7,MiddlePIP,30.05919,44.0655059814453
+
+7,RingPIP,30.05919,75.4267196655273
+
+7,PinkyPIP,30.05919,62.9983329772949
+
+7,ThumbIP,30.05919,1.49540948867798
+
+7,IndexMiddleABD,30.05919,5.37621927261353
+
+7,MiddleRingABD,30.05919,9.63351535797119
+
+7,RingPinkyABD,30.05919,4.84537124633789
+
+7,ThumbABD,30.05919,43.7926712036133
+
+7,ThumbROT,30.05919,39.1112785339355
+
+8,IndexMCP,31.12576,55.6566352844238
+
+8,MiddleMCP,31.12576,64.8030014038086
+
+8,RingMCP,31.12576,62.2478637695313
+
+8,PinkyMCP,31.12576,56.8128662109375
+
+8,ThumbMCP,31.12576,21.7413387298584
+
+8,IndexPIP,31.12576,33.6842155456543
+
+8,MiddlePIP,31.12576,59.1161613464355
+
+8,RingPIP,31.12576,94.2852935791016
+
+8,PinkyPIP,31.12576,87.6243286132813
+
+8,ThumbIP,31.12576,5.21642827987671
+
+8,IndexMiddleABD,31.12576,7.33473205566406
+
+8,MiddleRingABD,31.12576,2.62390780448914
+
+8,RingPinkyABD,31.12576,3.16767907142639
+
+8,ThumbABD,31.12576,41.1181373596191
+
+8,ThumbROT,31.12576,34.7172775268555
+
+9,IndexMCP,32.59229,51.613094329834
+
+9,MiddleMCP,32.59229,51.5285377502441
+
+9,RingMCP,32.59229,45.6522369384766
+
+9,PinkyMCP,32.59229,46.9204254150391
+
+9,ThumbMCP,32.59229,28.5873985290527
+
+9,IndexPIP,32.59229,71.1426696777344
+
+9,MiddlePIP,32.59229,87.8093719482422
+
+9,RingPIP,32.59229,85.0091705322266
+
+9,PinkyPIP,32.59229,65.1633148193359
+
+9,ThumbIP,32.59229,8.23682975769043
+
+9,IndexMiddleABD,32.59229,1.54775452613831
+
+9,MiddleRingABD,32.59229,1.00716543197632
+
+9,RingPinkyABD,32.59229,7.30511379241943
+
+9,ThumbABD,32.59229,41.0374336242676
+
+9,ThumbROT,32.59229,30.4120635986328
+
+10,IndexMCP,33.74195,9.01868152618408
+
+10,MiddleMCP,33.74195,16.5375328063965
+
+10,RingMCP,33.74195,10.4893312454224
+
+10,PinkyMCP,33.74195,12.0300970077515
+
+10,ThumbMCP,33.74195,19.6286525726318
+
+10,IndexPIP,33.74195,43.4064674377441
+
+10,MiddlePIP,33.74195,44.894702911377
+
+10,RingPIP,33.74195,61.8243408203125
+
+10,PinkyPIP,33.74195,57.5913619995117
+
+10,ThumbIP,33.74195,1.3382294178009
+
+10,IndexMiddleABD,33.74195,10.471043586731
+
+10,MiddleRingABD,33.74195,5.44013643264771
+
+10,RingPinkyABD,33.74195,8.99767780303955
+
+10,ThumbABD,33.74195,53.2976989746094
+
+10,ThumbROT,33.74195,45.0301170349121
+
+11,IndexMCP,35.77581,26.3260135650635
+
+11,MiddleMCP,35.77581,22.797269821167
+
+11,RingMCP,35.77581,15.9033737182617
+
+11,PinkyMCP,35.77581,18.9997005462646
+
+11,ThumbMCP,35.77581,21.0772972106934
+
+11,IndexPIP,35.77581,33.7172889709473
+
+11,MiddlePIP,35.77581,36.8673362731934
+
+11,RingPIP,35.77581,49.5922088623047
+
+11,PinkyPIP,35.77581,45.3479881286621
+
+11,ThumbIP,35.77581,5.42314386367798
+
+11,IndexMiddleABD,35.77581,9.77509307861328
+
+11,MiddleRingABD,35.77581,5.79991722106934
+
+11,RingPinkyABD,35.77581,8.62447929382324
+
+11,ThumbABD,35.77581,47.6180267333984
+
+11,ThumbROT,35.77581,43.2192573547363
+
+12,IndexMCP,37.14224,13.6711521148682
+
+12,MiddleMCP,37.14224,4.85861444473267
+
+12,RingMCP,37.14224,4.15515518188477
+
+12,PinkyMCP,37.14224,9.56092071533203
+
+12,ThumbMCP,37.14224,14.0961484909058
+
+12,IndexPIP,37.14224,8.2032470703125
+
+12,MiddlePIP,37.14224,8.49070167541504
+
+12,RingPIP,37.14224,3.95695781707764
+
+12,PinkyPIP,37.14224,9.7538480758667
+
+12,ThumbIP,37.14224,6.80668258666992
+
+12,IndexMiddleABD,37.14224,1.17819166183472
+
+12,MiddleRingABD,37.14224,5.54446744918823
+
+12,RingPinkyABD,37.14224,8.74711608886719
+
+12,ThumbABD,37.14224,39.7029113769531
+
+12,ThumbROT,37.14224,2.28032684326172
+
+13,IndexMCP,39.2933,16.8558578491211
+
+13,MiddleMCP,39.2933,17.2167205810547
+
+13,RingMCP,39.2933,12.0391712188721
+
+13,PinkyMCP,39.2933,11.3300590515137
+
+13,ThumbMCP,39.2933,20.1942749023438
+
+13,IndexPIP,39.2933,32.1012763977051
+
+13,MiddlePIP,39.2933,35.5452346801758
+
+13,RingPIP,39.2933,50.2168045043945
+
+13,PinkyPIP,39.2933,47.9912605285645
+
+13,ThumbIP,39.2933,6.1408224105835
+
+13,IndexMiddleABD,39.2933,14.0130233764648
+
+13,MiddleRingABD,39.2933,6.58752250671387
+
+13,RingPinkyABD,39.2933,9.21285724639893
+
+13,ThumbABD,39.2933,46.6893882751465
+
+13,ThumbROT,39.2933,40.7911338806152
+
+14,IndexMCP,41.79247,51.4777984619141
+
+14,MiddleMCP,41.79247,51.7842559814453
+
+14,RingMCP,41.79247,47.7173118591309
+
+14,PinkyMCP,41.79247,36.8066864013672
+
+14,ThumbMCP,41.79247,20.4076747894287
+
+14,IndexPIP,41.79247,21.5717239379883
+
+14,MiddlePIP,41.79247,78.6282424926758
+
+14,RingPIP,41.79247,89.9478607177734
+
+14,PinkyPIP,41.79247,87.7629013061523
+
+14,ThumbIP,41.79247,10.927173614502
+
+14,IndexMiddleABD,41.79247,5.01012372970581
+
+14,MiddleRingABD,41.79247,3.50570750236511
+
+14,RingPinkyABD,41.79247,10.1793689727783
+
+14,ThumbABD,41.79247,37.7994346618652
+
+14,ThumbROT,41.79247,33.3063888549805
+
+15,IndexMCP,43.29237,41.9213638305664
+
+15,MiddleMCP,43.29237,47.4099464416504
+
+15,RingMCP,43.29237,44.1578521728516
+
+15,PinkyMCP,43.29237,48.5867576599121
+
+15,ThumbMCP,43.29237,23.3627872467041
+
+15,IndexPIP,43.29237,80.7010498046875
+
+15,MiddlePIP,43.29237,87.6986312866211
+
+15,RingPIP,43.29237,84.0896224975586
+
+15,PinkyPIP,43.29237,64.9704208374023
+
+15,ThumbIP,43.29237,6.29080152511597
+
+15,IndexMiddleABD,43.29237,8.37761211395264
+
+15,MiddleRingABD,43.29237,4.3263087272644
+
+15,RingPinkyABD,43.29237,10.6953296661377
+
+15,ThumbABD,43.29237,36.4077453613281
+
+15,ThumbROT,43.29237,21.5184020996094
+
+16,IndexMCP,45.92494,10.9832944869995
+
+16,MiddleMCP,45.92494,7.37887096405029
+
+16,RingMCP,45.92494,12.2846908569336
+
+16,PinkyMCP,45.92494,19.314868927002
+
+16,ThumbMCP,45.92494,19.1635322570801
+
+16,IndexPIP,45.92494,38.0603256225586
+
+16,MiddlePIP,45.92494,43.7129096984863
+
+16,RingPIP,45.92494,67.4480133056641
+
+16,PinkyPIP,45.92494,58.199577331543
+
+16,ThumbIP,45.92494,6.83701467514038
+
+16,IndexMiddleABD,45.92494,15.5660886764526
+
+16,MiddleRingABD,45.92494,11.446216583252
+
+16,RingPinkyABD,45.92494,14.113525390625
+
+16,ThumbABD,45.92494,47.7294120788574
+
+16,ThumbROT,45.92494,44.2270431518555
+
+17,IndexMCP,49.07595,51.3962860107422
+
+17,MiddleMCP,49.07595,65.3293609619141
+
+17,RingMCP,49.07595,68.4951095581055
+
+17,PinkyMCP,49.07595,78.0442047119141
+
+17,ThumbMCP,49.07595,36.6723518371582
+
+17,IndexPIP,49.07595,81.8792877197266
+
+17,MiddlePIP,49.07595,96.1618499755859
+
+17,RingPIP,49.07595,99.7771301269531
+
+17,PinkyPIP,49.07595,87.555061340332
+
+17,ThumbIP,49.07595,26.3116722106934
+
+17,IndexMiddleABD,49.07595,16.9793300628662
+
+17,MiddleRingABD,49.07595,10.6844854354858
+
+17,RingPinkyABD,49.07595,17.8468780517578
+
+17,ThumbABD,49.07595,39.8678665161133
+
+17,ThumbROT,49.07595,33.4828605651855
+
+18,IndexMCP,50.62523,59.1057052612305
+
+18,MiddleMCP,50.62523,55.1955490112305
+
+18,RingMCP,50.62523,49.739933013916
+
+18,PinkyMCP,50.62523,51.9475250244141
+
+18,ThumbMCP,50.62523,15.95738697052
+
+18,IndexPIP,50.62523,31.9321594238281
+
+18,MiddlePIP,50.62523,40.0773277282715
+
+18,RingPIP,50.62523,71.2183837890625
+
+18,PinkyPIP,50.62523,67.9351959228516
+
+18,ThumbIP,50.62523,16.1621398925781
+
+18,IndexMiddleABD,50.62523,4.9201192855835
+
+18,MiddleRingABD,50.62523,1.21208453178406
+
+18,RingPinkyABD,50.62523,6.2301082611084
+
+18,ThumbABD,50.62523,42.795597076416
+
+18,ThumbROT,50.62523,41.2480430603027
+
+19,IndexMCP,52.14273,50.6007499694824
+
+19,MiddleMCP,52.14273,62.3910331726074
+
+19,RingMCP,52.14273,63.292064666748
+
+19,PinkyMCP,52.14273,68.4606018066406
+
+19,ThumbMCP,52.14273,31.9127960205078
+
+19,IndexPIP,52.14273,85.6445465087891
+
+19,MiddlePIP,52.14273,96.3719024658203
+
+19,RingPIP,52.14273,98.890754699707
+
+19,PinkyPIP,52.14273,87.3466110229492
+
+19,ThumbIP,52.14273,28.6421356201172
+
+19,IndexMiddleABD,52.14273,14.1405172348022
+
+19,MiddleRingABD,52.14273,7.97274780273438
+
+19,RingPinkyABD,52.14273,14.1846361160278
+
+19,ThumbABD,52.14273,43.0813827514648
+
+19,ThumbROT,52.14273,37.3369445800781
+
+20,IndexMCP,53.52538,55.5508689880371
+
+20,MiddleMCP,53.52538,67.9949340820313
+
+20,RingMCP,53.52538,68.2370986938477
+
+20,PinkyMCP,53.52538,73.2596282958984
+
+20,ThumbMCP,53.52538,32.176513671875
+
+20,IndexPIP,53.52538,88.1208190917969
+
+20,MiddlePIP,53.52538,97.5998840332031
+
+20,RingPIP,53.52538,98.6949081420898
+
+20,PinkyPIP,53.52538,86.02294921875
+
+20,ThumbIP,53.52538,22.5805244445801
+
+20,IndexMiddleABD,53.52538,13.7290029525757
+
+20,MiddleRingABD,53.52538,7.22957611083984
+
+20,RingPinkyABD,53.52538,13.1686697006226
+
+20,ThumbABD,53.52538,37.7428970336914
+
+20,ThumbROT,53.52538,28.9151802062988
+
+21,IndexMCP,57.2093,7.19704723358154
+
+21,MiddleMCP,57.2093,13.2274980545044
+
+21,RingMCP,57.2093,11.213978767395
+
+21,PinkyMCP,57.2093,19.3287811279297
+
+21,ThumbMCP,57.2093,16.7993030548096
+
+21,IndexPIP,57.2093,30.8616428375244
+
+21,MiddlePIP,57.2093,43.3388252258301
+
+21,RingPIP,57.2093,67.1346206665039
+
+21,PinkyPIP,57.2093,67.5436096191406
+
+21,ThumbIP,57.2093,3.37487053871155
+
+21,IndexMiddleABD,57.2093,15.9500198364258
+
+21,MiddleRingABD,57.2093,6.48754787445068
+
+21,RingPinkyABD,57.2093,13.4634990692139
+
+21,ThumbABD,57.2093,40.9643211364746
+
+21,ThumbROT,57.2093,23.6849746704102
+
+[XR] [1528] [21:54:44.726][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_FOCUSED->XR_SESSION_STATE_VISIBLE session=2 time=28737541710260
+[XR] [MROpenXR][Info   ][21:54:46.898895][tid:5f8] InputProvider_HandleEvent_Failed eventType=1381188948 deviceId=1 bufferSize=0
+[XR] [1528] [21:54:46.918][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_VISIBLE->XR_SESSION_STATE_SYNCHRONIZED session=2 time=28739734291927
+[XR] [1528] [21:54:46.918][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_SYNCHRONIZED->XR_SESSION_STATE_STOPPING session=2 time=28739734301562
+[XR] [MROpenXR][Info   ][21:54:46.931368][tid:5f8] InputProvider_LifecycleStop
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+XRTextureManager::RequestDestroyTexture
+[XR] [1528] [21:54:47.015][Info   ] OpenXRSession::HandleSessionStateChangedEvent: state XR_SESSION_STATE_STOPPING->XR_SESSION_STATE_IDLE session=2 time=28739834709843
+[XR] [MROpenXR][Error  ][21:54:48.773684][tid:177c] MeshProvider_AcquireMesh_UnableToLocateMesh
+[XR] [MROpenXR][Error  ][21:54:48.784601][tid:16e0] MeshProvider_AcquireMesh_UnableToLocateMesh

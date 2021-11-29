@@ -27,9 +27,10 @@ Original paper: [https://github.com/psych251/santello1998/blob/main/original_pap
 
 ## Methods
 
+<!--
 ### Power Analysis
 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.-->
 
 ### Planned Sample
 
@@ -46,9 +47,23 @@ The original paper used a Cyberglove hand-tracking device while the replication 
 
 "Subjects were instructed to shape the right hand to grasp and use a large number of imagined objects (n = 57; Table 1). They were encouraged to move the proximal arm in tandem with the hand motion. An object was named at the beginning of each trial. We selected objects spanning a large range of sizes and shapes to assess the consequent modulation of hand posture...The subject was asked to imagine the object floating in space at a distance of ∼40 cm anterior to the subject’s frontal plane. The elbow and wrist rested on a flat surface, the forearm was horizontal, the arm was oriented in the parasagittal plane passing through the shoulder, and the hand was in a semipronated position. At presentation of a “go” signal, the subject moved the arm and hand as if to grasp and use the named object. A contact switch was released at movement onset. When subjects had attained a static hand posture, they pressed a second switch with their left hand. Each subject performed a total of five trials for each of the objects; all trials were presented in random order."
 
-The above procedure was followed precisely and the list of objects presented in Table 1 of the paper was used without modification.
+The above procedure was followed with the following exceptions:
+1. The subject was asked to wear a Microsoft Hololens 2 throughout the procedure, and ensure that their entire right hand was in the field of view before confirming task completion.
+2. No contact switch was used at movement onset.
+3. The spacebar on a keyboard was pressed with the left hand to indicate completion of the task.
+4. Three (not five) trials were presented for each object.
 
+The list of objects presented in Table 1 of the paper was used without modification.
 <!--Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
+
+<!--Protocol for own reference
+Print out randomized lists for each participant, with serial numbers. In the spreadsheet, col M is original, then there are six randomized lists N-S starting with tennis racket, rope, chalk, dictionary, circular ashtray and espresso cup. Bis a list of random numbers that changes everytime. To generate a new list, sort col B in ascending order and allow the sorting to expand to include col A, then paste *values* from col A to a new column.
+
+Explain experiment to participant. Tell them if anything gets messed up just to let you know (then mark it on the sheet when that happened). Timestamps logging is a good thing in the worst case. 
+Couldn't get csv out of headset so:
+After experiment, paste the data from log file: paste special with comma delimiters, remove blank rows by home>>find and select>go to special>blanks and home>delete>rows. BE VERY CAREFUL.
+Keep original log files, original Excel pastes sheets, and one final compiled sheet. Manually fill participantID column in compiled sheet.
+-->
 
 ### Analysis Plan
 
@@ -87,7 +102,6 @@ You can comment this section out prior to final report with data collection.
 #### Differences from pre-data collection methods plan
   Any differences from what was described as the original plan, or “none”.
 
-
 ## Results
 
 
@@ -95,7 +109,7 @@ You can comment this section out prior to final report with data collection.
 
 Data preparation following the analysis plan.
 	
-```{r include=T, eval=F}
+```{r include=T, eval=T}
 ###Data Preparation
 
 ####Load Relevant Libraries and Functions
@@ -105,36 +119,40 @@ library(dplyr)
 library(stringr) # useful for some string manipulation
 library(ggplot2)
 library(corrr)
+library(readxl) # import excel files
 
 ####Import data
-d1 = read.csv("", to.data.frame=T)
-d2 = read.csv("", to.data.frame=T)
-d3 = read.csv("", to.data.frame=T)
-d4 = read.csv("", to.data.frame=T)
-d5 = read.csv("", to.data.frame=T)
+data_path <- '../pilot/pilotA.xlsx'
+d1 = read_excel(data_path, sheet=4)
+d1df = data.frame(d1)
 
 #hololens will be set up to give csv for each participant in the format 
 #trial -- object -- index_mcp -- index_pip -- etc
 
-handpose_wide_raw = bind_rows(list(d1, d2, d3, d4, d5), .id="Participant id")
+#handpose_wide_raw = bind_rows(list(d1, d2, d3, d4, d5), .id="Participant id")
 
 #### Data exclusion / filtering
 
 #should I even record contact switches timings?
 
 #### Prepare data for analysis - create columns etc.
-handpose_long_d = handpose_wide_raw %>%
-  pivot_longer(cols=-c("Participant id", "Object", "Trial"),
-               names_to='Joint', 
-               values_to='Angle_degrees')
-handpose_long %>% 
-  group_by(Participant_id, Object) %>%
+
+handpose_long = select(d1df, -Timestamp_seconds)
+handpose_wide_raw = pivot_wider(handpose_long, names_from = Joint, values_from = Angle_degrees)
+
+#handpose_long_d = handpose_wide_raw %>%
+#  pivot_longer(cols=-c("ParticipantID", "Object", "Trial", "Timestamp"),
+#               names_to='Joint', 
+#               values_to='Angle_degrees')
+
+handpose_means =  handpose_long %>% 
+  group_by(ParticipantID, Object, Joint) %>%
   summarise(Mean_angle_degrees = mean(Angle_degrees)) %>% #this will find mean over trials for given participant and object
-  mutate(Recentered_angle_degrees = Angle_degrees-Mean_angle_degrees) %>%
+  #mutate(Recentered_angle_degrees = Angle_degrees-Mean_angle_degrees) %>%
   ungroup()
 
-handpose_wide_processed = handpose_long %>%
-  pivot_wider(handpose_long, id_cols = -c(Mean_angle_degrees, Angle_degrees), names_from = Joint, values_from = Recentered_angle_degrees)
+handpose_wide_processed = handpose_means %>%
+  pivot_wider(names_from = "Joint", values_from = "Mean_angle_degrees")
 
 ```
 
@@ -142,14 +160,20 @@ handpose_wide_processed = handpose_long %>%
 
 The single statistical test that justifies the main inference of the paper is whether the amount of variation accounted for by the first two principal components together exceeds 80%.
 
-```{r, include=T, eval=F}
-handpose_wide_processed %>% 
-  group_by(Participant_id) %>%
-  group_modify(~ corrr::correlate(.x)) %>% # correlations across joints for given participant
-  nest(cols = -c(Participant_id, Object)) %>%
-  mutate(pca = map(data, ~ prcomp(.x, 
-                                  center = TRUE, scale = TRUE)),
-         pca_aug = map2(pca, data, ~augment(.x, data = .y))) # need to play around with this to understand it
+```{r, include=T, eval=T}
+
+
+pca_handpose = prcomp(select(handpose_wide_processed, -c(ParticipantID, Object)), center=TRUE, scale=TRUE)
+summary(pca_handpose)
+plot(pca_handpose$x[,1],pca_handpose$x[,2], xlab="PC1", ylab = "PC2", main = "PC1 / PC2 - plot")
+
+#handpose_wide_processed %>% 
+#  group_by(Participant_id) %>%
+#  group_modify(~ corrr::correlate(.x)) %>% # correlations across joints for given participant
+#  nest(cols = -c(Participant_id, Object)) %>%
+#  mutate(pca = map(data, ~ prcomp(.x, 
+#                                  center = TRUE, scale = TRUE)),
+#         pca_aug = map2(pca, data, ~augment(.x, data = .y))) # need to play around with this to understand it
 
 #var_exp <- handpose_wide_processed %>% 
 #  unnest(pca_aug) %>% 

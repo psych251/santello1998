@@ -11,7 +11,7 @@
 
 <meta name="author" content="Shivani Guptasarma (shivanig@stanford.edu)" />
 
-<meta name="date" content="2021-10-20" />
+<meta name="date" content="2021-11-29" />
 
 <title>Replication of Postural Hand Synergies for Tool Use by Santello, Flanders and Soechting (1998, Journal of Neuroscience)</title>
 
@@ -249,7 +249,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Replication of Postural Hand Synergies for Tool Use by Santello, Flanders and Soechting (1998, Journal of Neuroscience)</h1>
 <h4 class="author">Shivani Guptasarma (<a href="mailto:shivanig@stanford.edu" class="email">shivanig@stanford.edu</a>)</h4>
-<h4 class="date">October 20, 2021</h4>
+<h4 class="date">November 29, 2021</h4>
 
 </div>
 
@@ -265,10 +265,10 @@ div.tocify {
 </div>
 <div id="methods" class="section level2">
 <h2>Methods</h2>
-<div id="power-analysis" class="section level3">
-<h3>Power Analysis</h3>
-<p>Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size. Considerations of feasibility for selecting planned sample size.</p>
-</div>
+<!--
+### Power Analysis
+
+Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.-->
 <div id="planned-sample" class="section level3">
 <h3>Planned Sample</h3>
 <p>The sample of the original study as well as the replication was 5 right-handed participants, three male and two female. The age range of the original subjects was 30-41 years, while the replication used subjects of ages 22-30 years. <!--Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.--></p>
@@ -281,8 +281,16 @@ div.tocify {
 <div id="procedure" class="section level3">
 <h3>Procedure</h3>
 <p>“Subjects were instructed to shape the right hand to grasp and use a large number of imagined objects (n = 57; Table 1). They were encouraged to move the proximal arm in tandem with the hand motion. An object was named at the beginning of each trial. We selected objects spanning a large range of sizes and shapes to assess the consequent modulation of hand posture…The subject was asked to imagine the object floating in space at a distance of ∼40 cm anterior to the subject’s frontal plane. The elbow and wrist rested on a flat surface, the forearm was horizontal, the arm was oriented in the parasagittal plane passing through the shoulder, and the hand was in a semipronated position. At presentation of a “go” signal, the subject moved the arm and hand as if to grasp and use the named object. A contact switch was released at movement onset. When subjects had attained a static hand posture, they pressed a second switch with their left hand. Each subject performed a total of five trials for each of the objects; all trials were presented in random order.&quot;</p>
-<p>The above procedure was followed precisely and the list of objects presented in Table 1 of the paper was used without modification.</p>
-<!--Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
+<p>The above procedure was followed with the following exceptions: 1. The subject was asked to wear a Microsoft Hololens 2 throughout the procedure, and ensure that their entire right hand was in the field of view before confirming task completion. 2. No contact switch was used at movement onset. 3. The spacebar on a keyboard was pressed with the left hand to indicate completion of the task. 4. Three (not five) trials were presented for each object.</p>
+<p>The list of objects presented in Table 1 of the paper was used without modification. <!--Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.--></p>
+<!--Protocol for own reference
+Print out randomized lists for each participant, with serial numbers. In the spreadsheet, col M is original, then there are six randomized lists N-S starting with tennis racket, rope, chalk, dictionary, circular ashtray and espresso cup. Bis a list of random numbers that changes everytime. To generate a new list, sort col B in ascending order and allow the sorting to expand to include col A, then paste *values* from col A to a new column.
+
+Explain experiment to participant. Tell them if anything gets messed up just to let you know (then mark it on the sheet when that happened). Timestamps logging is a good thing in the worst case. 
+Couldn't get csv out of headset so:
+After experiment, paste the data from log file: paste special with comma delimiters, remove blank rows by home>>find and select>go to special>blanks and home>delete>rows. BE VERY CAREFUL.
+Keep original log files, original Excel pastes sheets, and one final compiled sheet. Manually fill participantID column in compiled sheet.
+-->
 </div>
 <div id="analysis-plan" class="section level3">
 <h3>Analysis Plan</h3>
@@ -323,51 +331,80 @@ div.tocify {
 ####Load Relevant Libraries and Functions
 library(foreign) # for reading spss formatted data
 library(tidyr)
-library(dplyr)
-library(stringr) # useful for some string manipulation
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(stringr) # useful for some string manipulation
 library(ggplot2)
 library(corrr)
+library(readxl) # import excel files
 
 ####Import data
-d1 = read.csv(&quot;&quot;, to.data.frame=T)
-d2 = read.csv(&quot;&quot;, to.data.frame=T)
-d3 = read.csv(&quot;&quot;, to.data.frame=T)
-d4 = read.csv(&quot;&quot;, to.data.frame=T)
-d5 = read.csv(&quot;&quot;, to.data.frame=T)
+data_path &lt;- &#39;../pilot/pilotA.xlsx&#39;
+d1 = read_excel(data_path, sheet=4)
+d1df = data.frame(d1)
 
 #hololens will be set up to give csv for each participant in the format 
 #trial -- object -- index_mcp -- index_pip -- etc
 
-handpose_wide_raw = bind_rows(list(d1, d2, d3, d4, d5), .id=&quot;Participant id&quot;)
+#handpose_wide_raw = bind_rows(list(d1, d2, d3, d4, d5), .id=&quot;Participant id&quot;)
 
 #### Data exclusion / filtering
 
 #should I even record contact switches timings?
 
 #### Prepare data for analysis - create columns etc.
-handpose_long_d = handpose_wide_raw %&gt;%
-  pivot_longer(cols=-c(&quot;Participant id&quot;, &quot;Object&quot;, &quot;Trial&quot;),
-               names_to=&#39;Joint&#39;, 
-               values_to=&#39;Angle_degrees&#39;)
-handpose_long %&gt;% 
-  group_by(Participant_id, Object) %&gt;%
-  summarise(Mean_angle_degrees = mean(Angle_degrees)) %&gt;% #this will find mean over trials for given participant and object
-  mutate(Recentered_angle_degrees = Angle_degrees-Mean_angle_degrees) %&gt;%
-  ungroup()
 
-handpose_wide_processed = handpose_long %&gt;%
-  pivot_wider(handpose_long, id_cols = -c(Mean_angle_degrees, Angle_degrees), names_from = Joint, values_from = Recentered_angle_degrees)</code></pre>
+handpose_long = select(d1df, -Timestamp_seconds)
+handpose_wide_raw = pivot_wider(handpose_long, names_from = Joint, values_from = Angle_degrees)
+
+#handpose_long_d = handpose_wide_raw %&gt;%
+#  pivot_longer(cols=-c(&quot;ParticipantID&quot;, &quot;Object&quot;, &quot;Trial&quot;, &quot;Timestamp&quot;),
+#               names_to=&#39;Joint&#39;, 
+#               values_to=&#39;Angle_degrees&#39;)
+
+handpose_means =  handpose_long %&gt;% 
+  group_by(ParticipantID, Object, Joint) %&gt;%
+  summarise(Mean_angle_degrees = mean(Angle_degrees)) %&gt;% #this will find mean over trials for given participant and object
+  #mutate(Recentered_angle_degrees = Angle_degrees-Mean_angle_degrees) %&gt;%
+  ungroup()</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;ParticipantID&#39;, &#39;Object&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>handpose_wide_processed = handpose_means %&gt;%
+  pivot_wider(names_from = &quot;Joint&quot;, values_from = &quot;Mean_angle_degrees&quot;)</code></pre>
 </div>
 <div id="confirmatory-analysis" class="section level3">
 <h3>Confirmatory analysis</h3>
 <p>The single statistical test that justifies the main inference of the paper is whether the amount of variation accounted for by the first two principal components together exceeds 80%.</p>
-<pre class="r"><code>handpose_wide_processed %&gt;% 
-  group_by(Participant_id) %&gt;%
-  group_modify(~ corrr::correlate(.x)) %&gt;% # correlations across joints for given participant
-  nest(cols = -c(Participant_id, Object)) %&gt;%
-  mutate(pca = map(data, ~ prcomp(.x, 
-                                  center = TRUE, scale = TRUE)),
-         pca_aug = map2(pca, data, ~augment(.x, data = .y))) # need to play around with this to understand it
+<pre class="r"><code>pca_handpose = prcomp(select(handpose_wide_processed, -c(ParticipantID, Object)), center=TRUE, scale=TRUE)
+summary(pca_handpose)</code></pre>
+<pre><code>## Importance of components:
+##                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
+## Standard deviation     3.3483 1.4193 0.8975 0.66356 0.48268 0.33838 0.30349
+## Proportion of Variance 0.7474 0.1343 0.0537 0.02935 0.01553 0.00763 0.00614
+## Cumulative Proportion  0.7474 0.8817 0.9354 0.96476 0.98030 0.98793 0.99407
+##                            PC8     PC9    PC10    PC11    PC12     PC13
+## Standard deviation     0.23173 0.15325 0.09365 0.04144 0.03511 0.007567
+## Proportion of Variance 0.00358 0.00157 0.00058 0.00011 0.00008 0.000000
+## Cumulative Proportion  0.99765 0.99921 0.99980 0.99991 1.00000 1.000000
+##                             PC14
+## Standard deviation     1.073e-16
+## Proportion of Variance 0.000e+00
+## Cumulative Proportion  1.000e+00</code></pre>
+<pre class="r"><code>plot(pca_handpose$x[,1],pca_handpose$x[,2], xlab=&quot;PC1&quot;, ylab = &quot;PC2&quot;, main = &quot;PC1 / PC2 - plot&quot;)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<pre class="r"><code>#handpose_wide_processed %&gt;% 
+#  group_by(Participant_id) %&gt;%
+#  group_modify(~ corrr::correlate(.x)) %&gt;% # correlations across joints for given participant
+#  nest(cols = -c(Participant_id, Object)) %&gt;%
+#  mutate(pca = map(data, ~ prcomp(.x, 
+#                                  center = TRUE, scale = TRUE)),
+#         pca_aug = map2(pca, data, ~augment(.x, data = .y))) # need to play around with this to understand it
 
 #var_exp &lt;- handpose_wide_processed %&gt;% 
 #  unnest(pca_aug) %&gt;% 
