@@ -185,7 +185,7 @@ public class logJointData : MonoBehaviour
             Debug.Log(i + "," + "IndexMiddleABD" +","+ Time.time + "," + findJointAngle2(indexKnuckle, indexMiddleJoint, middleKnuckle, middleMiddleJoint));
             Debug.Log(i + "," + "MiddleRingABD" +","+ Time.time + "," + findJointAngle2(middleKnuckle, middleMiddleJoint, ringKnuckle, ringMiddleJoint));
             Debug.Log(i + "," + "RingPinkyABD" +","+ Time.time + "," + findJointAngle2(ringKnuckle, ringMiddleJoint, pinkyKnuckle, pinkyMiddleJoint));
-            Debug.Log(i + "," + "ThumbABD" +","+ Time.time + "," + findJointAngle2(thumbMetacarpalJoint, thumbProximalJoint, indexMetacarpal, indexKnuckle));
+            Debug.Log(i + "," + "ThumbABD" +","+ Time.time + "," + findThumbAbd(thumbMetacarpalJoint, indexMetacarpal, middleMetacarpal, thumbProximalJoint, indexKnuckle, middleKnuckle));
             Debug.Log(i + "," + "ThumbROT" +","+ Time.time + "," + findThumbRot(thumbMetacarpalJoint, indexMetacarpal, middleMetacarpal,thumbProximalJoint, indexKnuckle, middleKnuckle));
 
         }

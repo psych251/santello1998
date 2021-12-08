@@ -39,7 +39,7 @@ The sample of the original study as well as the replication was 5 right-handed p
 
 ### Materials
 
-The original paper used a Cyberglove hand-tracking device while the replication used a Microsoft Hololens 2. A contact switch was for detecting movement onset and a second switch was to be pressed by the left hand, following the paper precisely.
+The original paper used a Cyberglove hand-tracking device while the replication used a Microsoft Hololens 2. A keyboard was used in place of a contact switch to register the completion of the grasping task.
 
 <!--All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.-->
 
@@ -69,12 +69,18 @@ Keep original log files, original Excel pastes sheets, and one final compiled sh
 
 The key analysis of interest is the principal component analysis of the static joint angles after the goal pose is achieved. Hence, only one frame of joint angles data was used in the analysis for each trial. 
 
+The joint angles are recorded using a Unity app written for this purpose, with the hand-tracking feature built into the Windows Mixed Reality Toolkit (MRTK). A C# script was written to record joint positions when the participant presses the spacebar on a keyboard, compute joint angles from the positions, and log them to a text file as comma-separated values. The script is available at [https://github.com/psych251/santello1998/blob/main/code/hand_tracking/Assets/logJointData.cs](https://github.com/psych251/santello1998/blob/main/code/hand_tracking/Assets/logJointData.cs). 
+
+The data was placed into Excel spreadsheets by the following procedure:
+1. Before data collection: populating the ParticipantID column manually, and randomizing a list of obejcts with three instances of each object in the second column; repeating each instance 15 times so that the joint angles can be pasted after data collection;
+2. After data collection: manually copying and pasting comma-separated data from the log file into the third column, using the Text Import Wizard to separate trial number, timestamp, joint name, and joint angle into separate columns; selecting and deleting alternate blank rows; replacing perfect zeros (representing failed data capture) with blank cells.
+
 The joint angles estimated from visual tracking were (following the original work):
 1. metacarpal-phalangeal (mcp) and proximal interphalangeal (pip) flexion of each of the 4 fingers
 2. abduction between the 3 pairs of adjacent fingers
 3. mcp flexion, abduction, ip flexion, and rotation of the thumb
 
-The following analysis procedure was followed precisely:
+The following analysis procedure was followed precisely, except with three trials rather than five:
 
 "For each subject, the five trials per object were first averaged to obtain a total of 57 hand postures. For each sensor, we then subtracted the grand mean computed over the 57 objects (so that the range was centered about 0°). The hand posture for each object was thus characterized as a “waveform” of the values of the 15 sensors (Santello and Soechting, 1997). The principal components (PCs) were then computed from the eigenvalues and eigenvectors of the matrix of the covariance coefficients between each of the 57 waveforms."
 
@@ -85,8 +91,9 @@ The following analysis procedure was followed precisely:
 ### Differences from Original Study
 
 The replication differed from the original study in that:
-1. data was collected using a headset rather than a tracking glove
-2. participant ages belonged to a lower range than the original
+1. data was collected using a headset rather than a tracking glove,
+2. participant ages belonged to a lower range than the original, and
+3. each object was presented three times and not five times.
 
 The conclusions are expected to be robust to these changes. 
 
@@ -118,12 +125,13 @@ library(tidyr)
 library(dplyr)
 library(stringr) # useful for some string manipulation
 library(ggplot2)
+library(ggrepel)
 library(corrr)
 library(readxl) # import excel files
 
 ####Import data
-data_path <- '../pilot/pilotA.xlsx'
-d1 = read_excel(data_path, sheet=4)
+data_path <- '../pilot/pilotB.xlsx'
+d1 = read_excel(data_path, sheet=2)
 d1df = data.frame(d1)
 
 #hololens will be set up to give csv for each participant in the format 
@@ -147,12 +155,28 @@ handpose_wide_raw = pivot_wider(handpose_long, names_from = Joint, values_from =
 
 handpose_means =  handpose_long %>% 
   group_by(ParticipantID, Object, Joint) %>%
-  summarise(Mean_angle_degrees = mean(Angle_degrees)) %>% #this will find mean over trials for given participant and object
+  summarise(Mean_angle_degrees = mean(Angle_degrees, na.rm = TRUE)) %>% #this will find mean over trials for given participant and object
   #mutate(Recentered_angle_degrees = Angle_degrees-Mean_angle_degrees) %>%
   ungroup()
 
-handpose_wide_processed = handpose_means %>%
-  pivot_wider(names_from = "Joint", values_from = "Mean_angle_degrees")
+handpose_wide_processed_uncentered = handpose_means %>%
+  group_by(ParticipantID)%>%
+  pivot_wider(names_from = "Object", values_from = "Mean_angle_degrees")%>%
+  ungroup
+
+
+#handpose_wide_processed = handpose_wide_processed_uncentered %>% 
+#  mutate(Recentered_angle_degrees = select(handpose_wide_processed_uncentered, -c(ParticipantID, Object))-colMeans(select(handpose_wide_processed_uncentered,-c(ParticipantID, Object))))
+
+handpose_wide_processed_all <-
+  data.frame(ParticipantID = handpose_wide_processed_uncentered$ParticipantID, Joint = handpose_wide_processed_uncentered$Joint,
+  select(handpose_wide_processed_uncentered, -c(ParticipantID, Joint))-rowMeans(select(handpose_wide_processed_uncentered, -c(ParticipantID, Joint)), na.rm = TRUE))
+
+#handpose_wide_transposed_all <- handpose_wide_processed_all %>%
+  #group_by(ParticipantID) %>%
+  #pivot_longer(-c(ParticipantID, Joint), names_to = "Object", values_to = "Mean_angle_degrees_centered")%>%
+  #pivot_wider(names_from = "Joint", values_from = "Mean_angle_degrees_centered")%>%
+  #ungroup()
 
 ```
 
@@ -162,10 +186,114 @@ The single statistical test that justifies the main inference of the paper is wh
 
 ```{r, include=T, eval=T}
 
+#split data into participants
+datalist = split(handpose_wide_processed_all, f= handpose_wide_processed_all$ParticipantID)
 
-pca_handpose = prcomp(select(handpose_wide_processed, -c(ParticipantID, Object)), center=TRUE, scale=TRUE)
-summary(pca_handpose)
-plot(pca_handpose$x[,1],pca_handpose$x[,2], xlab="PC1", ylab = "PC2", main = "PC1 / PC2 - plot")
+njoints = length(unique(handpose_long$Joint))
+nobj = length(unique(handpose_long$Object))
+npart = length(unique(handpose_long$ParticipantID))
+
+#outputs to compare
+object_plots <- vector(mode = "list", length = npart)
+variance_plots <- vector(mode = "list", length = npart)
+pva_list <- vector(mode = "list", length = npart)
+#coeffs_list <- data.frame(Participant = rep(as.factor(c(1:npart)), each=nobj), Object =  rep(as.character(c(1:nobj)), times=npart), PC1 = rep(c(1:nobj), times=npart), PC2 = rep(c(1:nobj), times=npart))
+coeffs_list <- data.frame(Participant = rep(as.factor(c(1:npart)), each=nobj), Object =  rep(as.character(NA), times=npart*nobj), PC1 = rep(NA, times=npart*nobj), PC2 = rep(NA, times=npart*nobj))
+
+#do PCA for each participant
+for(i in 1:npart){
+handpose_wide_processed = as.data.frame(datalist[[i]])
+
+colnames(handpose_wide_processed) = colnames(handpose_wide_processed_all)
+row.names(handpose_wide_processed) <- handpose_wide_processed$Joint
+
+handpose_wide_processed <- handpose_wide_processed %>%
+  select(-c(ParticipantID, Joint)) %>%
+    select_if(~ !any(is.na(.)))
+
+handpose_wide_transposed = t(handpose_wide_processed)
+  
+#eigenvalues of covariance matrix, just to check that prcomp is doing the same thing as authors did
+jointscov = cov(handpose_wide_transposed)
+                
+eigvals = eigen(jointscov)$values 
+eigvecs = eigen(jointscov)$vectors
+
+
+#pca_handpose = prcomp(handpose_wide_processed, scale=FALSE)
+#summary(pca_handpose)
+#pca_handpose$sd^2
+
+#array for objects in PC basis
+df_coeffs <- as.data.frame(handpose_wide_transposed-handpose_wide_transposed)
+colnames(df_coeffs) <- c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10","PC11", "PC12", "PC13", "PC14","PC15")
+  
+nobj_i = ncol(handpose_wide_processed)
+
+for (objnumber in 1:nobj_i){
+  for (pcnumber in 1:njoints) {
+  #testvec <- testvec -sum(pca_handpose$x[,pcnumber]*handpose_wide_processed$Apple)/sum(pca_handpose$x[,pcnumber]*pca_handpose$x[,pcnumber])*pca_handpose$x[,pcnumber]
+  df_coeffs[objnumber,pcnumber] <- sum(eigvecs[,pcnumber]*handpose_wide_processed[,objnumber])
+  }
+}
+
+start = nobj_i*(i-1)+1
+end = nobj_i*i
+coeffs_list$Object[start:end] <- rownames(df_coeffs)
+coeffs_list$PC1[start:end] <- df_coeffs[,1]
+coeffs_list$PC2[start:end] <- df_coeffs[,2]
+
+#check -- this should be close to zero in each entry
+df_check <- as.data.frame(handpose_wide_processed)
+for (objnumber in 1:nobj_i){
+  for (pcnumber in 1:njoints) {
+  #testvec <- testvec -sum(pca_handpose$x[,pcnumber]*handpose_wide_processed$Apple)/sum(pca_handpose$x[,pcnumber]*pca_handpose$x[,pcnumber])*pca_handpose$x[,pcnumber]
+  df_check[,objnumber] <- df_check[,objnumber] - df_coeffs[objnumber, pcnumber]*eigvecs[,pcnumber]
+  }
+}
+
+
+#object_plots[[i]]<- p
+
+# Variability of each principal component: pr.var
+#pr.var <- pca_handpose$sd^2
+# Variance explained by each principal component: pve
+pva_list[[i]] <- eigvals / sum(eigvals)
+
+}
+
+#plot(pva_list[[i]], xlab = "Principal Component", ylab = "Proportion of Variance Explained", ylim = c(0, 1), type = "b")
+
+
+xValue <- 1:njoints
+#yValue <- cumsum(pva_list[[1]])
+#data <- data.frame(xValue,yValue)
+
+dfplot <- data.frame(Participant = rep(as.factor(c(1:npart)), each=njoints), xValue,c(cumsum(pva_list[[1]]), cumsum(pva_list[[2]])))
+
+colnames(dfplot)<-c("Participant", "PC", "Percent_variance_explained")
+                     
+# Plot
+vp <- ggplot(dfplot, aes(x = PC, y= Percent_variance_explained, group = Participant, color=Participant)) +
+  geom_line() +ggtitle("Cumulative Proportion of Variance Explained")+
+  geom_point() + ylab("Cumulative Proportion of Variance Explained") + scale_x_discrete(name="Principal Component", limits = colnames(df_coeffs)) + theme_minimal()+theme(legend.position="top") # + ylim(0, 1)
+
+vp
+
+# Plot cumulative proportion of variance explained
+#vp <- plot(cumsum(pve), xlab = "Principal Component",
+#     ylab = "Cumulative Proportion of Variance Explained",
+#     ylim = c(0, 1), type = "b")
+
+theme<-theme(panel.background = element_blank(),panel.border=element_rect(fill=NA),panel.grid.major = element_blank(),panel.grid.minor = element_blank(),strip.background=element_blank(),axis.text.x=element_text(colour="black"),axis.text.y=element_text(colour="black"),axis.ticks=element_line(colour="black"),plot.margin=unit(c(1,1,1,1),"line"))
+
+coeffs_list<- na.omit(coeffs_list)
+                                                                                                               
+p<-ggplot(coeffs_list,aes(x=PC1, y=PC2, group = Participant))
+p<-p+geom_point()+ geom_text_repel(size=2, label=coeffs_list$Object, max.overlaps = Inf)+theme+facet_wrap(Participant~., ncol=2, labeller = label_both)
+p
+
+#AFTER DATA COLLECTION, some of the axes of PC plots may need to be flipped just to make visual comparison easier (sign of eigenvector doesn't matter to the analysis)
 
 #handpose_wide_processed %>% 
 #  group_by(Participant_id) %>%
