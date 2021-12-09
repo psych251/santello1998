@@ -132,7 +132,6 @@ library(dplyr)
 library(stringr) # useful for some string manipulation
 library(ggplot2)
 library(ggrepel)
-library(corrr)
 library(readxl) # import excel files
 
 ####Import data
