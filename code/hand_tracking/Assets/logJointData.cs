@@ -9,6 +9,8 @@ public class logJointData : MonoBehaviour
     private int i = 0;
     private Vector3 vec1;
     private Vector3 vec2;
+    private Vector3 vec01;
+    private Vector3 vec02;
     private Vector3 indexvec;
     private Vector3 middlevec;
     private Vector3 thumbproj;
@@ -53,6 +55,18 @@ public class logJointData : MonoBehaviour
         vec1 = new Vector3(j2.Position.x - j1.Position.x, j2.Position.y - j1.Position.y, j2.Position.z - j1.Position.z);
         vec2 = new Vector3(j4.Position.x - j3.Position.x, j4.Position.y - j3.Position.y, j4.Position.z - j3.Position.z);
         angle = Vector3.Angle(vec1, vec2);
+        return angle;
+    }
+
+    private double findJointAngleP(MixedRealityPose j0, MixedRealityPose j1, MixedRealityPose j2, MixedRealityPose j00, MixedRealityPose j3, MixedRealityPose j4)
+    {
+        //find angle bw j1-j2 and j3-j4 projections on plane containing j0-j1 and j00-j3
+        vec1 = new Vector3(j2.Position.x - j1.Position.x, j2.Position.y - j1.Position.y, j2.Position.z - j1.Position.z);
+        vec2 = new Vector3(j4.Position.x - j3.Position.x, j4.Position.y - j3.Position.y, j4.Position.z - j3.Position.z);
+        vec01 = new Vector3(j1.Position.x - j0.Position.x, j1.Position.y - j0.Position.y, j1.Position.z - j0.Position.z);
+        vec02 = new Vector3(j3.Position.x - j00.Position.x, j3.Position.y - j00.Position.y, j3.Position.z - j00.Position.z);
+        palmNormal = Vector3.Cross(vec02, vec01); //Unity system is left-handed, this vector points ventrally if vec01 is more medial than vec02 on right hand
+        angle = Vector3.Angle(Vector3.ProjectOnPlane(vec2, palmNormal), Vector3.ProjectOnPlane(vec1, palmNormal));
         return angle;
     }
 
@@ -185,6 +199,9 @@ public class logJointData : MonoBehaviour
             Debug.Log(i + "," + "IndexMiddleABD" +","+ Time.time + "," + findJointAngle2(indexKnuckle, indexMiddleJoint, middleKnuckle, middleMiddleJoint));
             Debug.Log(i + "," + "MiddleRingABD" +","+ Time.time + "," + findJointAngle2(middleKnuckle, middleMiddleJoint, ringKnuckle, ringMiddleJoint));
             Debug.Log(i + "," + "RingPinkyABD" +","+ Time.time + "," + findJointAngle2(ringKnuckle, ringMiddleJoint, pinkyKnuckle, pinkyMiddleJoint));
+            Debug.Log(i + "," + "IndexMiddleABDproj" + "," + Time.time + "," + findJointAngleP(indexMetacarpal, indexKnuckle, indexMiddleJoint, middleMetacarpal, middleKnuckle, middleMiddleJoint));
+            Debug.Log(i + "," + "MiddleRingABDproj" + "," + Time.time + "," + findJointAngleP(middleMetacarpal, middleKnuckle, middleMiddleJoint, ringMetacarpal, ringKnuckle, ringMiddleJoint));
+            Debug.Log(i + "," + "RingPinkyABDproj" + "," + Time.time + "," + findJointAngleP(ringMetacarpal, ringKnuckle, ringMiddleJoint, pinkyMetacarpal, pinkyKnuckle, pinkyMiddleJoint));
             Debug.Log(i + "," + "ThumbABD" +","+ Time.time + "," + findThumbAbd(thumbMetacarpalJoint, indexMetacarpal, middleMetacarpal, thumbProximalJoint, indexKnuckle, middleKnuckle));
             Debug.Log(i + "," + "ThumbROT" +","+ Time.time + "," + findThumbRot(thumbMetacarpalJoint, indexMetacarpal, middleMetacarpal,thumbProximalJoint, indexKnuckle, middleKnuckle));
 
