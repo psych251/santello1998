@@ -24,6 +24,8 @@ Project repository: [https://github.com/psych251/santello1998](https://github.co
 
 Original paper: [https://github.com/psych251/santello1998/blob/main/original_paper/Santello1998_postural_synergies.pdf](https://github.com/psych251/santello1998/blob/main/original_paper/Santello1998_postural_synergies.pdf)
 
+Preregistration: [https://osf.io/97yvz](https://osf.io/97yvz)
+
 
 ## Methods
 
@@ -107,20 +109,35 @@ The conclusions are expected to be robust to these changes.
 
 ### Methods Addendum (Post Data Collection)
 
-You can comment this section out prior to final report with data collection.
+Verbal instructions to participants were as follows.
+
+1. Imagine the object is about 40 centimeters in front of you and you are using it with one hand.
+2. Try to keep the virtual information tab showing frame rate and CPU usage below your hand in your field-of-vision so that the chances of joint angles being captured is higher.
+3. If the information tab disappears at any time, stop and inform the experimenter.
+3. If you do not know what the object is, you can ask or imagine your closest guess.
+4. If you do not hear or understand what was said, please ask again. 
+5. If you accidentally press the spacebar twice or miss pressing it, inform the experimenter so that it can be marked on the object list as a duplicate recording. 
+
+Participant 2 made a double-press twice, and participant 3 and 5 once each. The trial number was noted and matched the total number of readings in the log file. The experiment with participant 3 was interrupted by a draining of the Hololens battery and needed to be repeated from the beginning. The interruption recurred with participant 4; however, it was between two key presses, and therefore could be resumed without repetition.
+
+The recordings corresponding to double-presses were excluded before analysis. 
+
+The original script for converting joint positions to joint angles calculated the three angles (pairwise) between the proximal phalanges of adjacent fingers. While these angles are valid measurements of hand posture and the result is expected to be robust to how they are measured, they are not 'true' abduction angles. It was thought that projecting the phalange vector onto the plane of the palm before measuring the angle might yield qualitative analyses closer to those in the original study where a glove was used to measure abduction angles. Hence, a measurement of the projected angle was added to the logging script in order to make exploratory analysis possible in this regard. This change was made before data collection from the fifth and final participant. It was made without any data processing or analysis of the previous four participants, and only additions were made; the sections of code used to make the pre-registered measurements were not edited in any way. 
 
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+Five right-handed individuals in the age range 22-27 years participated in the study, four of them female and one male. No exclusion criteria were specified in the analysis plan and no exclusions were necessary. 
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
+The verbal instructions to participants were modified after the first participant, to include what they should do if the information tab disappeared; and after the third participant, to include a physical demonstration of a key press.
+Procedures for dealing with double readings are described above and were used consistently for all 5 participants. Abduction angles for adjacent fingers, measured in the plane containing the metacarpal bones (in the palm) of the same fingers, were added to the list of recorded data before collecting data from the fifth participant; these are used in exploratory analysis only, and not for the confirmatory analysis. Extra rows were created manually in the Excel spreadsheet to accommodate repeated measurements and additional measurements. These measurements were indicated by suffixes to the joint names to allow for filtering during analysis.
 
 ## Results
 
+The results presented below confirm that the cumulative proportion of variance accounted for by the first two principal components indeed exceeds 80% for each of the five participants. Exploratory plots of the objects in the PC1/PC2 plane are also presented. Participant 1 was able to record 54 of 57 hand postures with 3 lying outside the field of view of the Hololens, while the other 4 participants recorded all 57.
 
 ### Data preparation
 
-Data preparation following the analysis plan.
+Data preparation following the analysis plan:
 	
 ```{r include=T, eval=T}
 ###Data Preparation
@@ -135,8 +152,8 @@ library(ggrepel)
 library(readxl) # import excel files
 
 ####Import data
-data_path <- '../pilot/pilotB.xlsx'
-d1 = read_excel(data_path, sheet=2)
+data_path <- '../participant_data/santello1998_participant_data.xlsx'
+d1 = read_excel(data_path, sheet=1)
 d1df = data.frame(d1)
 
 #hololens gives data that is easiest to paste in long form
@@ -145,7 +162,16 @@ d1df = data.frame(d1)
 
 #### Prepare data for analysis - create columns etc.
 
-handpose_long = select(d1df, -Timestamp_seconds)
+handpose_long_unfiltered = select(d1df, -Timestamp_seconds)
+
+#post data collection addendum
+#exclude double presses and readings reserved for exploratory analysis
+handpose_long = handpose_long_unfiltered %>%
+  filter(!str_detect(Joint, "proj")) %>%
+  filter(!str_detect(Object, "ignore"))
+  #remove repeated observations marked during experiment
+  #remove projected abduction angles for confirmatory analysis
+
 handpose_wide_raw = pivot_wider(handpose_long, names_from = Joint, values_from = Angle_degrees)
 
 #average over repeated trials
@@ -164,6 +190,7 @@ handpose_wide_processed_uncentered = handpose_means %>%
 handpose_wide_processed_all <-
   data.frame(ParticipantID = handpose_wide_processed_uncentered$ParticipantID, Joint = handpose_wide_processed_uncentered$Joint,
   select(handpose_wide_processed_uncentered, -c(ParticipantID, Joint))-rowMeans(select(handpose_wide_processed_uncentered, -c(ParticipantID, Joint)), na.rm = TRUE))
+
 
 ```
 
@@ -211,6 +238,7 @@ colnames(df_coeffs) <- c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8",
 
 #actual number of objects for which data was captured for this participant  
 nobj_i = ncol(handpose_wide_processed)
+nobj_i
 
 #fill in coefficients of each PC for each object for this participant
 for (objnumber in 1:nobj_i){
@@ -243,7 +271,7 @@ pva_list[[i]] <- eigvals / sum(eigvals)
 
 #plot cumulative proportion of variance explained by PCs for all participants
 xValue <- 1:njoints
-dfplot <- data.frame(Participant = rep(as.factor(c(1:npart)), each=njoints), xValue,c(cumsum(pva_list[[1]]), cumsum(pva_list[[2]])))
+dfplot <- data.frame(Participant = rep(as.factor(c(1:npart)), each=njoints), xValue, c(cumsum(pva_list[[1]]), cumsum(pva_list[[2]]), cumsum(pva_list[[3]]), cumsum(pva_list[[4]]), cumsum(pva_list[[5]])))
 colnames(dfplot)<-c("Participant", "PC", "Percent_variance_explained")
 
 vp <- ggplot(dfplot, aes(x = PC, y= Percent_variance_explained, group = Participant, color=Participant)) +
@@ -252,34 +280,244 @@ vp <- ggplot(dfplot, aes(x = PC, y= Percent_variance_explained, group = Particip
 
 vp
 
-#plot objects in the PC1-PC2 space for all participants
+
+```
+
+From the above, the key test is successful, as the cumulative proportion of variance at the second principal component is above 0.8 for every one of the participants. For specific comparison with the original paper, the percent variances accounted for by the first two principal components are presented below (data from original study are from Table 2 of the paper). Of course, the participant IDs are not relevant when comparing across experiments. These data are presented here only to show the details of the percent variation explained.
+
+```{r, include=T, eval=F}
+pva_table <- data.frame(Participant = c(1:npart), OriginalPC1 = c(1:5), OriginalPC2 =  c(1:5), ReplicationPC1 = c(1:5), ReplicationPC2 =  c(1:5), Totalorig =c(1:5),  Totalrep=  c(1:5)) 
+pva_table$OriginalPC1 = c(52.9, 49.5, 74.8, 79.3, 62.9)
+pva_table$OriginalPC2 = c(24.7, 37.6, 13.0, 10.0, 17.2)
+pva_table$Totalorig =pva_table$OriginalPC1+pva_table$OriginalPC2
+pva_table$ReplicationPC1 = 100*c(pva_list[[1]][1], pva_list[[2]][1], pva_list[[3]][1], pva_list[[4]][1], pva_list[[5]][1])
+pva_table$ReplicationPC2 = 100*c(pva_list[[1]][2], pva_list[[2]][2], pva_list[[3]][2], pva_list[[4]][2], pva_list[[5]][2])
+pva_table$Totalrep = pva_table$ReplicationPC1 + pva_table$ReplicationPC2
+colnames(pva_table) = c("Participant", "PC1 (original)", "PC2 (original)", "PC1 (replication)", "PC2 (replication)", "PC1+PC2 (original)", "PC1+PC2 (replication)")
+pva_table
+```
+
+
+```{r, include=T, eval=T, fig.width=30, fig.asp=1}
+
+#knitr::opts_chunk$set(fig.width = 20) 
+
+#plot objects in the PC1/PC2 space for all participants
 theme<-theme(panel.background = element_blank(),panel.border=element_rect(fill=NA),panel.grid.major = element_blank(),panel.grid.minor = element_blank(),strip.background=element_blank(),axis.text.x=element_text(colour="black"),axis.text.y=element_text(colour="black"),axis.ticks=element_line(colour="black"),plot.margin=unit(c(1,1,1,1),"line"))
 
 coeffs_list<- na.omit(coeffs_list)
                                                                                                                
 p<-ggplot(coeffs_list,aes(x=PC1, y=PC2, group = Participant))
-p<-p+geom_point()+ geom_text_repel(size=2, label=coeffs_list$Object, max.overlaps = Inf)+theme+facet_wrap(Participant~., ncol=2, labeller = label_both)
+p<-p+geom_point()+ geom_text_repel(size=5, label=coeffs_list$Object, max.overlaps = Inf)+theme+facet_wrap(Participant~., ncol=1, labeller = label_both) + scale_x_reverse() + scale_y_reverse() +coord_fixed(ratio = 1)
 p
+
+#edited output figure size of the code chunk (thanks Xi Jia!) and font size of ggrepel post data collection
 
 #AFTER DATA COLLECTION, some of the axes of PC plots may need to be flipped just to make visual comparison easier (sign of eigenvector doesn't matter to the analysis)
 
+
 ```
-![Plot of objects in the PC1/PC2 plane from the original paper (Fig. 7)](fig7_santello1998.jpg)
+The plot of objects in the PC1/PC2 plane for a single participant is given in the original paper as Figure 7 of that paper. It is reproduced below for comparison. While the scale of coefficients on the x-axis is very different in the replication, some patterns seem to be common to the two studies. For example, at least the plots for participants 3, 4, and 5 seem to have a bilinear distribution. Interestingly, the authors of the original study also found such a pattern in exactly 3 of their 5 subjects, including the one whose data is the source of Figure 7. 
 
-<!--The analyses as specified in the analysis plan.-->
+Comparing the locations of specific objects in the plot from the original paper with Participant 5 from the replication, the relative positions of the CD, screwdriver, coffee mug, baseball, egg, computer mouse, wrench, milk carton, notebook, tennis racket, dictionary, doorknob, frying pan, knob of a lid, cherry, dinner plate and several others seem to match quite well between the two plots, despite the mismatch in numerical values (which is likely due to some scaling of unit eigenvectors by the original authors which was not done in the replication). At least, objects that are together on the right or left side of one plot seem to be on the same side in the other plot as well. Examples of objects whose locations do not match are the Chinese teacup and turtle, both less universally-encountered objects to which participants in the replication expressed bewilderment. Some common objects such as the zipper and chalk are also out of alignment. Still, the existence of any correspondence at all in this context is surprising, particularly since there were differences across participants in how the prompts were interpreted, and at least two participants mentioned informally that they may have imagined different grasps in different trials of the same object. If indeed such a grouping (separation by the sign of the first principal component) is significant, it would be very interesting to examine what it represents. As pointed out by the authors of Santello *et al.*, it does not appear to be related to grasp taxonomies.
 
-*Side-by-side graph with original graph is ideal here*
+```{r, out.width = "400px"}
+#![Plot of objects in the PC1/PC2 plane from the original paper (Fig. 7)](fig7_santello1998.jpg)
+knitr::include_graphics("fig7_santello1998.jpg")
+```
 
-###Exploratory analyses
 
-Any follow-up analyses desired (not required).  
+### Exploratory analyses
+
+One of the exploratory analyses is shown above as it was planned prior to the data collection. This section includes two other exploratory analyses: the first, replacement of the angles between the proximal phalanges with the angle between their projections on the palm (potentially a closer measure of abduction angle to that used in the original study), and the second, a repetition of the confirmatory test after scaling of joint angles by their standard deviations. This scaling step is common in PCA, however, it is not mentioned in the original paper despite centering about the mean being explicitly mentioned. For that reason, it was omitted in the confirmatory analysis. 
+
+```{r include=T, eval=T}
+#Using projections of fingers to find abduction angles in the plane of the palm -- for Participant 5 alone
+
+handpose_long_proj = handpose_long_unfiltered %>%
+    filter(!str_detect(Object, "ignore"))%>%
+  #remove repeated observations marked during experiment
+  filter(ParticipantID == "5" & (!str_detect(Joint, "ABD") | (str_detect(Joint, "proj") | str_detect(Joint, "Thumb"))))
+  #select data belonging to participant 5, which is either not an abduction angle, or if it is, then is either of the thumb or a projected angle
+
+handpose_wide_raw_proj = pivot_wider(handpose_long_proj, names_from = Joint, values_from = Angle_degrees)
+
+#average over repeated trials
+handpose_means_proj =  handpose_long_proj %>% 
+  select(-c(ParticipantID))%>%
+  group_by(Object, Joint) %>%
+  summarise(Mean_angle_degrees = mean(Angle_degrees, na.rm = TRUE)) %>% #this will find mean over trials for given participant and object
+  ungroup()
+
+#wide format 
+handpose_wide_processed_uncentered_proj = handpose_means_proj %>%
+  pivot_wider(names_from = "Object", values_from = "Mean_angle_degrees")%>%
+  ungroup
+
+#wide format for all participants, centered around mean for each joint angle calculated over objects
+handpose_wide_processed_proj <-
+  data.frame(Joint = handpose_wide_processed_uncentered_proj$Joint,
+  select(handpose_wide_processed_uncentered_proj, -c(Joint))-rowMeans(select(handpose_wide_processed_uncentered_proj, -c(Joint)), na.rm = TRUE))
+
+njoints5 = length(unique(handpose_long_proj$Joint)) #number of joints
+nobj5 = length(unique(handpose_long_proj$Object)) #number of objects
+
+#set row and column names
+row.names(handpose_wide_processed_proj) <- handpose_wide_processed_proj$Joint
+
+#keep only joint angles in the data, remove columns where data is missing (possible if all trials for an object failed)
+handpose_wide_processed_proj <- handpose_wide_processed_proj %>%
+  select(-c(Joint)) %>%
+    select_if(~ !any(is.na(.)))
+```
+
+
+```{r include=T, eval=T}
+handpose_wide_transposed_proj = t(handpose_wide_processed_proj)
+  
+#eigenvalues and eigenvectors of covariance matrix
+jointscov = cov(handpose_wide_transposed_proj)
+eigvals = eigen(jointscov)$values 
+eigvecs = eigen(jointscov)$vectors
+
+#create array to store joint vectors for objects expressed in PC basis
+df_coeffs5 <- as.data.frame(handpose_wide_transposed_proj-handpose_wide_transposed_proj)
+colnames(df_coeffs5) <- c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10","PC11", "PC12", "PC13", "PC14","PC15")
+
+#actual number of objects for which data was captured for this participant  
+nobj5 = ncol(handpose_wide_processed_proj)
+
+#fill in coefficients of each PC for each object for this participant
+for (objnumber in 1:nobj5){
+  for (pcnumber in 1:njoints) {
+  df_coeffs5[objnumber,pcnumber] <- sum(eigvecs[,pcnumber]*handpose_wide_processed_proj[,objnumber])
+  }
+}
+
+coeffs_list5 <- data.frame(Object =  rep(as.character(NA), times=nobj5), PC1 = rep(NA, times=nobj5), PC2 = rep(NA, times=nobj5))  #dataframe containing coefficients of PC1 and PC2 for each object (for plotting)
+start = 1
+end = nobj5
+coeffs_list5$Object[start:end] <- rownames(df_coeffs5)
+coeffs_list5$PC1[start:end] <- df_coeffs5[,1]
+coeffs_list5$PC2[start:end] <- df_coeffs5[,2]
+
+#check -- this should be close to zero in each entry, it is the object data minus the appropriate linear combination of PCs for that object with the calculated coefficients
+df_check5 <- as.data.frame(handpose_wide_processed_proj)
+for (objnumber in 1:nobj5){
+  for (pcnumber in 1:njoints) {
+  df_check5[,objnumber] <- df_check5[,objnumber] - df_coeffs5[objnumber, pcnumber]*eigvecs[,pcnumber]
+  }
+}
+
+
+#frobenius norm will be close to zero only if all entries are close to zero as they should be
+norm(data.matrix(df_check5), "f")
+
+# Proportion of variance explained by each principal component
+pva_list5 <- eigvals / sum(eigvals)
+
+#plot cumulative proportion of variance explained by PCs
+dfplot5 <- data.frame(Analysis = rep(as.factor(c(1:2)), each = njoints5), xval = rep(xValue, times=2), pva = c(cumsum(pva_list[[5]]), cumsum(pva_list5)))
+colnames(dfplot5)<-c("Analysis", "PC", "PVE")
+
+vp5 <- ggplot(dfplot5, aes(x = PC, y= PVE, group = Analysis, color = Analysis)) +
+  geom_line() +ggtitle("Cumulative Proportion of Variance Explained for Participant 5")+
+  geom_point() + ylab("Cumulative Proportion of Variance Explained") + scale_x_discrete(name="Principal Component", limits = colnames(df_coeffs5)) + theme_minimal()
+
+vp5
+
+#plot objects in the PC1/PC2 space for participant 5
+coeffs_list5<- na.omit(coeffs_list5)
+
+expplot1 <- data.frame(Analysis = rep(as.factor(c(1:2)), each=nobj5), Object = rep(coeffs_list5$Object, times=2), PC1 = c(filter(coeffs_list, coeffs_list$Participant=="5")$PC1, (-1)*coeffs_list5$PC1), PC2 = c(filter(coeffs_list, coeffs_list$Participant=="5")$PC2, coeffs_list5$PC2))
+
+p512<-ggplot(expplot1, aes(x=PC1, y=PC2, group = Analysis, color = Analysis))
+p512<-p512+geom_point()+ geom_text_repel(size=2, label=expplot1$Object, max.overlaps = Inf)+theme + scale_x_reverse() + scale_y_reverse() +coord_fixed(ratio = 1) # + facet_wrap(Analysis~., ncol=2, labeller = label_both) + 
+p512
+
+
+```
+With this method of measurement, the plots of cumulative proportion of variance and objects in the PC1/PC2 plane both shift slightly, however, the first two principal components continue to account for more than 0.8 of the variance.
+
+```{r include=T, eval=T}
+
+#with scaling by standard deviation
+
+handpose_wide_transposed = handpose_wide_transposed %>%
+  apply(2,function(x){x/sd(x)}) #scaling step
+
+  
+#eigenvalues and eigenvectors of covariance matrix
+jointscov = cov(handpose_wide_transposed)
+eigvals = eigen(jointscov)$values 
+eigvecs = eigen(jointscov)$vectors
+
+#create array to store joint vectors for objects expressed in PC basis
+df_coeffs5 <- as.data.frame(handpose_wide_transposed-handpose_wide_transposed)
+colnames(df_coeffs5) <- c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10","PC11", "PC12", "PC13", "PC14","PC15")
+
+#actual number of objects for which data was captured for this participant  
+nobj5 = ncol(handpose_wide_processed)
+
+#fill in coefficients of each PC for each object for this participant
+for (objnumber in 1:nobj5){
+  for (pcnumber in 1:njoints) {
+  df_coeffs5[objnumber,pcnumber] <- sum(eigvecs[,pcnumber]*t(handpose_wide_transposed)[,objnumber])
+  }
+}
+
+coeffs_list5 <- data.frame(Object =  rep(as.character(NA), times=nobj), PC1 = rep(NA, times=nobj), PC2 = rep(NA, times=nobj))  #dataframe containing coefficients of PC1 and PC2 for each object (for plotting)
+start = 1
+end = nobj5
+coeffs_list5$Object[start:end] <- rownames(df_coeffs5)
+coeffs_list5$PC1[start:end] <- df_coeffs5[,1]
+coeffs_list5$PC2[start:end] <- df_coeffs5[,2]
+
+#check -- this should be close to zero in each entry, it is the object data minus the appropriate linear combination of PCs for that object with the calculated coefficients
+df_check5 <- as.data.frame(t(handpose_wide_transposed))
+for (objnumber in 1:nobj5){
+  for (pcnumber in 1:njoints) {
+  df_check5[,objnumber] <- df_check5[,objnumber] - df_coeffs5[objnumber, pcnumber]*eigvecs[,pcnumber]
+  }
+}
+
+
+#frobenius norm will be close to zero only if all entries are close to zero as they should be
+norm(data.matrix(df_check5), "f")
+
+# Proportion of variance explained by each principal component
+pva_list5 <- eigvals / sum(eigvals)
+
+#plot cumulative proportion of variance explained by PCs 
+dfplot5 <- data.frame(Analysis = rep(as.factor(c(1:2)), each = njoints), xval = rep(xValue, times=2), pva = c(cumsum(pva_list[[5]]), cumsum(pva_list5)))
+colnames(dfplot5)<-c("Analysis", "PC", "PVE")
+
+vp5 <- ggplot(dfplot5, aes(x = PC, y= PVE, group = Analysis, color = Analysis)) +
+  geom_line() +ggtitle("Cumulative Proportion of Variance Explained for Participant 5")+
+  geom_point() + ylab("Cumulative Proportion of Variance Explained") + scale_x_discrete(name="Principal Component", limits = colnames(df_coeffs5)) + theme_minimal()
+
+vp5
+
+#plot objects in the PC1/PC2 space for participant 5
+coeffs_list5<- na.omit(coeffs_list5)
+
+expplot1 <- data.frame(Analysis = rep(as.factor(c(1:2)), each=nobj5), Object = rep(coeffs_list5$Object, times=2), PC1 = c(filter(coeffs_list, coeffs_list$Participant=="5")$PC1, coeffs_list5$PC1), PC2 = c(filter(coeffs_list, coeffs_list$Participant=="5")$PC2, coeffs_list5$PC2))
+
+p512<-ggplot(expplot1, aes(x=PC1, y=PC2, group = Analysis, color = Analysis))
+p512<-p512+geom_point()+ geom_text_repel(size=3, label=expplot1$Object, max.overlaps = Inf)+ scale_x_reverse() + scale_y_reverse() + facet_wrap(Analysis~., ncol=2, labeller = label_both, scales="free") 
+p512
+
+
+```
+Scaling the readings for each joint by their standard deviation reduces the amount of variance explained by the first two principal components, and the cumulative proportion of variance does not exceed 0.8 until as many as four principal components are included. The plot of coefficients shrinks by almost an order of magnitude along both PC1 and PC2 axes.
+
+It is worth mentioning here that PC1 being a principal component implies that -PC1 is also the same principal component, therefore, axes of the PC1/PC2 plots have been inverted on several occasions within this document, and at times, the values been plotted have been all negated at once to make comparison with another plot easier.
 
 ## Discussion
 
-### Summary of Replication Attempt
+The primary result, that the first two principal components account for more than 80% of the variance in joint angles in all participants, was successfully replicated according to the measurement method defined at the outset. The exploratory analysis suggests that changing the way in which abduction angles are estimated will not affect this result. 
 
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+It stands to reason that an inference about the effective degrees-of-freedom of the hand should not be affected by the specific parameters used to represent hand pose. It is encouraging to note that, as expected, the result is robust to a change of parameters, a change of measurement device, and the passage of 23 years. Certain objects in the list have lost their relevance since the original paper was published (e.g, compact disc); some were functionally unfamiliar to some replication participants (ashtray, Chinese tea cup); some were imagined in various shapes by various participants (e.g. drawer handle) and even across trials by the same participant, some were ``used" in different ways (e.g., lifting or patting a turtle), some typically require bimanual operation and were consequently treated differently by different participants (e.g., fishing rod). Yet the diversity of the list remains adequate to test the hypothesis and arrive at the same conclusion. Moreover, for many objects, the arrangements of objects along the PC1/PC2 plane that are reported in the original paper reappear in the replication.
 
-### Commentary
+It is exciting to note this last fact, that objects seem to group together on either side of a vertical axis (or, along two oblique lines) in a very similar manner across participants, including when compared to the participant whose data is plotted in the original paper. If these groupings are unrelated to grasp taxonomy, it must at least have meaning with respect to the handshapes represented by the two principal components. The original paper includes a discussion of the continuum between poses represented by moving on the PC1/PC2 plane; a good extension of this replication project would be to compare the principal components derived to those in the original paper, in terms of the handshape that they represent, and to examine -- by visualizing hand postures -- why the remaining two subjects' postures do not seem to be arranged in the same way. Another extension would be to complete the reproduction of other results provided in the paper, such as the information theoretic analysis that led the authors to assess 5 degrees of freedom as being sufficient to capture fine adjustments in hand posture.
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
